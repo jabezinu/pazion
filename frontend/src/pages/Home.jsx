@@ -186,9 +186,8 @@ export default function GemstonHomepage() {
                     <span>{gem.carat}</span>
                     <span>{gem.origin}</span>
                   </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-2xl font-bold text-blue-600">{gem.price}</span>
-                    <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-semibold transition">
+                  <div className="flex justify-center">
+                    <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full text-sm font-semibold transition">
                       View Details
                     </button>
                   </div>
