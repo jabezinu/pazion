@@ -17,7 +17,7 @@ export default function GemstonHomepage() {
       browseGemstones: "መኣድናትን ለማየት",
       
       // Services Section
-      ourServices: "አገልግሎቶች",
+      ourServices: "የምንሰጣቸው አገልግሎቶች",
       // servicesSubtitle: "ለሁሉም የእንቁ ፍላጎቶችዎ ሙሉ መፍትሄዎች",
       buyGemstones: "እንቁዎችን ይግዙ",
       buyDesc: "የላቀ ጥራት ያላቸው መኣድናት",
