@@ -5,9 +5,9 @@ export default function GemstonesPage() {
   const [language, setLanguage] = useState('am');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedQuality, setSelectedQuality] = useState('all');
   const [selectedOrigin, setSelectedOrigin] = useState('all');
   const [priceRange, setPriceRange] = useState('all');
-  const [sortBy, setSortBy] = useState('featured');
   const [showFilters, setShowFilters] = useState(false);
   const [favorites, setFavorites] = useState([]);
 
@@ -129,6 +129,7 @@ export default function GemstonesPage() {
       id: 1,
       name: t.blueSapphire,
       category: "precious",
+      quality: "luxury",
       hardness: "9",
       origin: t.ceylon,
       price: 2500,
@@ -141,6 +142,7 @@ export default function GemstonesPage() {
       id: 2,
       name: t.ruby,
       category: "precious",
+      quality: "luxury",
       hardness: "9",
       origin: t.burma,
       price: 3200,
@@ -153,6 +155,7 @@ export default function GemstonesPage() {
       id: 3,
       name: t.emerald,
       category: "precious",
+      quality: "luxury",
       hardness: "7.5-8",
       origin: t.colombia,
       price: 2800,
@@ -165,6 +168,7 @@ export default function GemstonesPage() {
       id: 4,
       name: t.pinkTourmaline,
       category: "semi-precious",
+      quality: "commercial",
       hardness: "7-7.5",
       origin: t.brazil,
       price: 1500,
@@ -177,6 +181,7 @@ export default function GemstonesPage() {
       id: 5,
       name: t.aquamarine,
       category: "semi-precious",
+      quality: "commercial",
       hardness: "7.5-8",
       origin: t.pakistan,
       price: 1800,
@@ -189,6 +194,7 @@ export default function GemstonesPage() {
       id: 6,
       name: t.amethyst,
       category: "semi-precious",
+      quality: "affordable",
       hardness: "7",
       origin: t.uruguay,
       price: 950,
@@ -201,6 +207,7 @@ export default function GemstonesPage() {
       id: 7,
       name: t.yellowSapphire,
       category: "precious",
+      quality: "luxury",
       hardness: "9",
       origin: t.ceylon,
       price: 2200,
@@ -213,6 +220,7 @@ export default function GemstonesPage() {
       id: 8,
       name: t.tanzanite,
       category: "semi-precious",
+      quality: "commercial",
       hardness: "6.5-7",
       origin: t.tanzania,
       price: 1900,
@@ -225,6 +233,7 @@ export default function GemstonesPage() {
       id: 9,
       name: t.garnet,
       category: "semi-precious",
+      quality: "affordable",
       hardness: "6.5-7.5",
       origin: t.madagascar,
       price: 850,
@@ -237,6 +246,7 @@ export default function GemstonesPage() {
       id: 10,
       name: t.citrine,
       category: "semi-precious",
+      quality: "affordable",
       hardness: "7",
       origin: t.brazil,
       price: 680,
@@ -249,6 +259,7 @@ export default function GemstonesPage() {
       id: 11,
       name: t.topaz,
       category: "semi-precious",
+      quality: "commercial",
       hardness: "8",
       origin: t.brazil,
       price: 1200,
@@ -261,6 +272,7 @@ export default function GemstonesPage() {
       id: 12,
       name: t.peridot,
       category: "semi-precious",
+      quality: "affordable",
       hardness: "6.5-7",
       origin: t.pakistan,
       price: 750,
@@ -285,28 +297,16 @@ export default function GemstonesPage() {
   const filteredGemstones = gemstones.filter(gem => {
     const matchesSearch = gem.name.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory = selectedCategory === 'all' || gem.category === selectedCategory;
-    const matchesOrigin = selectedOrigin === 'all' || gem.origin === selectedOrigin;
+    const matchesQuality = selectedQuality === 'all' || gem.quality === selectedQuality;
 
-    let matchesPrice = true;
-    if (priceRange === 'under1000') matchesPrice = gem.price < 1000;
-    else if (priceRange === '1000-3000') matchesPrice = gem.price >= 1000 && gem.price <= 3000;
-    else if (priceRange === '3000-5000') matchesPrice = gem.price >= 3000 && gem.price <= 5000;
-    else if (priceRange === 'above5000') matchesPrice = gem.price > 5000;
-
-    return matchesSearch && matchesCategory && matchesOrigin && matchesPrice;
+    return matchesSearch && matchesCategory && matchesQuality;
   });
 
-  const sortedGemstones = [...filteredGemstones].sort((a, b) => {
-    if (sortBy === 'price-low') return a.price - b.price;
-    if (sortBy === 'price-high') return b.price - a.price;
-    if (sortBy === 'newest') return b.isNew - a.isNew;
-    return 0; // featured (default order)
-  });
+  const sortedGemstones = [...filteredGemstones];
 
   const clearAllFilters = () => {
     setSelectedCategory('all');
-    setSelectedOrigin('all');
-    setPriceRange('all');
+    setSelectedQuality('all');
     setSearchTerm('');
   };
 
@@ -348,19 +348,20 @@ export default function GemstonesPage() {
               {t.filters}
             </button>
 
-            {/* Sort */}
+            {/* Quality Filter */}
             <div className="flex items-center gap-4">
               <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
+                value={selectedQuality}
+                onChange={(e) => setSelectedQuality(e.target.value)}
                 className="px-4 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
-                <option value="featured">{t.featured}</option>
-                <option value="price-low">{t.priceLowToHigh}</option>
-                <option value="price-high">{t.priceHighToLow}</option>
-                <option value="newest">{t.newest}</option>
+                <option value="all">Qualities</option>
+                <option value="affordable">Affordable Gemstone </option>
+                <option value="commercial">Commercial-quality Gemstone </option>
+                <option value="luxury">Luxury Gemstone </option>
               </select>
             </div>
+
           </div>
         </div>
       </div>
@@ -427,6 +428,7 @@ export default function GemstonesPage() {
 
                     <div className="flex justify-between text-sm text-gray-600 mb-4">
                       <span>Hardness: {gem.hardness}</span>
+                      <span className="capitalize">{gem.quality}</span>
                     </div>
                   </div>
                 </div>
