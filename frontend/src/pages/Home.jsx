@@ -356,6 +356,7 @@
 
 
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { ChevronRight, Star, Award, Globe, Users, ShoppingBag, TestTube, Wrench, GraduationCap, MessageCircle, Languages } from 'lucide-react';
 
 export default function GemstonHomepage() {
@@ -366,20 +367,20 @@ export default function GemstonHomepage() {
   const translations = {
     am: {
       // Hero Section
-      heroTitle: "ለፕሪሚየም እንቁዎች የታመነ አጋርዎ",
-      heroSubtitle: "ከማዕድን እስከ ገበያ - ሙሉ የእንቁ መፍትሄዎች",
+      heroTitle: "ጳዝዮን - ለመአድን ንግዶ የታመነ አጋር",
+      heroSubtitle: "ከማዕድን ቁፋሮ እስከ አለም አቀፍ ገበያ",
       heroDescription: "መግዛት፣ መሸጥ፣ መመርመር እና ስልጠና - ከ2009 ጀምሮ የሀገር ውስጥና አለም አቀፍ ገበያዎችን እናገለግላለን",
       browseGemstones: "መኣድናትን ለማየት",
       
       // Services Section
-      ourServices: "የእኛ አገልግሎቶች",
-      servicesSubtitle: "ለሁሉም የእንቁ ፍላጎቶችዎ ሙሉ መፍትሄዎች",
+      ourServices: "አገልግሎቶች",
+      // servicesSubtitle: "ለሁሉም የእንቁ ፍላጎቶችዎ ሙሉ መፍትሄዎች",
       buyGemstones: "እንቁዎችን ይግዙ",
-      buyDesc: "ለችርቻሮ እና ጅምላ ሽያጭ የላቀ ጥራት ያላቸው ድንጋዮች",
+      buyDesc: "የላቀ ጥራት ያላቸው መኣድናት",
       sellGemstones: "እንቁዎችዎን ይሽጡ",
-      sellDesc: "ፍትሃዊ ዋጋዎች፣ ፈጣን ግምገማ",
-      gemstoneTesting: "የእንቁ ምርመራ",
-      testingDesc: "ፕሮፌሽናል ማረጋገጫ እና ደረጃ አሰጣጥ",
+      sellDesc: "መኣድናትን እንገዛለን",
+      gemstoneTesting: "መአድን ምርመራ",
+      testingDesc: "ፕሮፌሽናል ማረጋገጫ",
       equipmentTools: "መሳሪያዎች እና መገልገያዎች",
       equipmentDesc: "ለንግድዎ ፕሮፌሽናል ማሽነሪዎች",
       trainingCourses: "የስልጠና ኮርሶች",
@@ -409,22 +410,22 @@ export default function GemstonHomepage() {
       
       // Stats
       gemstonesSold: "የተሸጡ እንቁዎች",
-      businessesServed: "የተገለገሉ ንግዶች",
+      businessesServed: "ግብይቶች",
       countriesReached: "የደረሱባቸው አገሮች",
       studentsTrained: "የሰለጠኑ ተማሪዎች",
       
       // Testimonials
-      testimonialTitle: "ደንበኞቻችን ምን ይላሉ",
+      testimonialTitle: "የደንበኞቻችን አስተያየት",
       testimonialSubtitle: "በአለም ዙሪያ በሺዎች የሚተማመኑበት",
       testimonial1Name: "ሳራ ጆንሰን",
       testimonial1Location: "ኒው ዮርክ፣ አሜሪካ",
       testimonial1Text: "እጅግ በጣም ጥሩ ጥራት እና አገልግሎት። ለእኔ የጌጣጌጥ ንግድ በርካታ እንቁዎችን ገዛሁ እና እያንዳንዱ ድንጋይ እውነተኛ እና ቆንጆ ነበር።",
       testimonial2Name: "አህመድ አል-ራህማን",
       testimonial2Location: "ዱባይ፣ ኢማራት",
-      testimonial2Text: "የእነርሱ የምርመራ አገልግሎት ጥሩ ነው። ፈጣን፣ ትክክለኛ እና ፕሮፌሽናል። ለጅምላ ገዢዎች በጣም የሚመከር።",
+      testimonial2Text: "የእነርሱ የምርመራ አገልግሎት ጥሩ ነው። ፈጣን፣ ትክክለኛ እና ፕሮፌሽናል።",
       testimonial3Name: "ማሪያ ሳንቶስ",
       testimonial3Location: "ሳኦ ፓውሎ፣ ብራዚል",
-      testimonial3Text: "የስልጠና ኮርሱ በጣም ጥሩ ነበር! ስለ እንቁ መለየት እና ደረጃ አሰጣጥ ብዙ ተማርኩ። እያንዳንዱ ሳንቲም ይገባዋል።",
+      testimonial3Text: "የስልጠና ኮርሱ በጣም ጥሩ ነበር! ስለ መአድናት መለየት እና ደረጃ አሰጣጥ ብዙ ተማርኩ። እያንዳንዱ ሳንቲም ይገባዋል።",
       
       // Process
       ourProcess: "የእኛ ሂደት",
@@ -440,8 +441,8 @@ export default function GemstonHomepage() {
     },
     en: {
       // Hero Section
-      heroTitle: "Your Trusted Partner in Premium Gemstones",
-      heroSubtitle: "From Mine to Market - Complete Gemstone Solutions",
+      heroTitle: "Pazion - Shine Like A Gemstone",
+      heroSubtitle: "From Mine to International Market",
       heroDescription: "Buying, Selling, Testing & Training - Serving Local & International Markets Since 2009",
       browseGemstones: "Browse Gemstones",
       
@@ -627,9 +628,11 @@ export default function GemstonHomepage() {
                 {t.heroDescription}
               </p>
               <div className="flex flex-wrap gap-4">
-                <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105 shadow-xl">
-                  {t.browseGemstones}
-                </button>
+                <Link to="/gemstones">
+                  <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105 shadow-xl">
+                    {t.browseGemstones}
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -712,9 +715,11 @@ export default function GemstonHomepage() {
           </div>
           
           <div className="text-center mt-12">
-            <button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:shadow-lg text-white px-10 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105">
-              {t.viewAllGemstones}
-            </button>
+            <Link to="/gemstones">
+              <button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:shadow-lg text-white px-10 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105">
+                {t.viewAllGemstones}
+              </button>
+            </Link>
           </div>
         </div>
       </section>
