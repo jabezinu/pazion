@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronRight, Star, Award, Globe, Users, ShoppingBag, TestTube, Wrench, GraduationCap, MessageCircle, Phone, Mail, MapPin, Facebook, Instagram, Linkedin, Youtube } from 'lucide-react';
 
 export default function GemstonHomepage() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [currentHeroImage, setCurrentHeroImage] = useState(0);
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+   const [currentHeroImage, setCurrentHeroImage] = useState(0);
+   const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
   const heroImages = [
     'https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=1920&q=80',
@@ -81,10 +80,8 @@ export default function GemstonHomepage() {
 
   return (
     <div className="min-h-screen bg-white">
-
-
       {/* Hero Section */}
-      <section className="relative h-screen mt-20 overflow-hidden">
+      <section className="relative h-screen overflow-hidden">
         {heroImages.map((img, idx) => (
           <div
             key={idx}
@@ -112,12 +109,6 @@ export default function GemstonHomepage() {
               <div className="flex flex-wrap gap-4">
                 <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105 shadow-xl">
                   Browse Gemstones
-                </button>
-                <button className="bg-white hover:bg-gray-100 text-gray-900 px-8 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105 shadow-xl">
-                  Get Quote
-                </button>
-                <button className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105 shadow-xl">
-                  Book Testing
                 </button>
               </div>
             </div>
@@ -213,7 +204,7 @@ export default function GemstonHomepage() {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-20 bg-gradient-to-br from-blue-600 to-purple-600 text-white">
+      {/* <section className="py-20 bg-gradient-to-br from-blue-600 to-purple-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">Why Choose Us</h2>
@@ -243,80 +234,20 @@ export default function GemstonHomepage() {
             </div>
           </div>
         </div>
-      </section>
-
-      {/* B2B Section */}
-      {/* <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <img 
-                src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=800&q=80"
-                alt="Business"
-                className="rounded-2xl shadow-2xl"
-              />
-            </div>
-            <div>
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">Wholesale & B2B Solutions</h2>
-              <p className="text-xl text-gray-600 mb-8">
-                Partner with us for your business gemstone needs. We provide comprehensive solutions tailored for wholesale buyers and business clients.
-              </p>
-              <ul className="space-y-4 mb-8">
-                <li className="flex items-start">
-                  <ChevronRight className="w-6 h-6 text-blue-600 mr-2 flex-shrink-0 mt-1" />
-                  <span className="text-gray-700">Bulk purchasing options with competitive pricing</span>
-                </li>
-                <li className="flex items-start">
-                  <ChevronRight className="w-6 h-6 text-blue-600 mr-2 flex-shrink-0 mt-1" />
-                  <span className="text-gray-700">Custom sourcing for specific requirements</span>
-                </li>
-                <li className="flex items-start">
-                  <ChevronRight className="w-6 h-6 text-blue-600 mr-2 flex-shrink-0 mt-1" />
-                  <span className="text-gray-700">Professional testing services for your inventory</span>
-                </li>
-                <li className="flex items-start">
-                  <ChevronRight className="w-6 h-6 text-blue-600 mr-2 flex-shrink-0 mt-1" />
-                  <span className="text-gray-700">Long-term business partnerships and support</span>
-                </li>
-              </ul>
-              <button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:shadow-lg text-white px-8 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105">
-                Contact Our B2B Team
-              </button>
-            </div>
-          </div>
-        </div>
       </section> */}
 
-      {/* Knowledge Hub */}
-      <section className="py-20 bg-gray-50">
+            {/* Stats */}
+      <section className="py-16 bg-gradient-to-r from-gray-900 to-gray-800 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Gemstone Knowledge Hub</h2>
-            <p className="text-xl text-gray-600">Learn from industry experts</p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {articles.map((article, idx) => (
-              <div
-                key={idx}
-                className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2 cursor-pointer"
-              >
-                <img src={article.image} alt={article.title} className="w-full h-48 object-cover" />
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">{article.title}</h3>
-                  <p className="text-gray-600 mb-4">{article.excerpt}</p>
-                  <div className="flex items-center text-blue-600 font-semibold hover:gap-2 transition-all">
-                    Read More <ChevronRight className="w-5 h-5" />
-                  </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {stats.map((stat, idx) => (
+              <div key={idx} className="text-center">
+                <div className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                  {stat.number}
                 </div>
+                <div className="text-gray-300">{stat.label}</div>
               </div>
             ))}
-          </div>
-          
-          <div className="text-center mt-12">
-            <button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:shadow-lg text-white px-10 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105">
-              Explore All Resources
-            </button>
           </div>
         </div>
       </section>
@@ -410,21 +341,7 @@ export default function GemstonHomepage() {
         </div>
       </section>
 
-      {/* Stats */}
-      <section className="py-16 bg-gradient-to-r from-gray-900 to-gray-800 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, idx) => (
-              <div key={idx} className="text-center">
-                <div className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                  {stat.number}
-                </div>
-                <div className="text-gray-300">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+
 
       {/* Footer */}
 

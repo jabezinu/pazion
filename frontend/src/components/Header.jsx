@@ -5,7 +5,7 @@ export default function Header() {
   const [isServicesOpen, setIsServicesOpen] = useState(false);
 
   return (
-    <header className="bg-white shadow-md">
+    <header className="fixed w-full bg-white/95 backdrop-blur-sm shadow-md z-50">
       <nav className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
           <Link to="/" className="text-2xl font-bold text-blue-600">
