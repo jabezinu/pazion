@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
+import { Languages } from 'lucide-react';
 
 export default function Header() {
   const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const { language, toggleLanguage } = useLanguage();
 
   return (
     <header className="fixed w-full bg-white/95 backdrop-blur-sm shadow-md z-50">
@@ -37,7 +40,14 @@ export default function Header() {
             <li><Link to="/about" className="text-gray-700 hover:text-blue-600">About</Link></li>
             <li><Link to="/contact" className="text-gray-700 hover:text-blue-600">Contact</Link></li>
           </ul>
-          <button className="md:hidden">
+          <button
+            onClick={toggleLanguage}
+            className="bg-white hover:bg-gray-100 text-gray-800 px-4 py-2 rounded-full shadow-lg flex items-center gap-2 transition"
+          >
+            <Languages className="w-5 h-5" />
+            <span className="font-semibold">{language === 'am' ? 'English' : 'አማርኛ'}</span>
+          </button>
+          <button className="md:hidden ml-2">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
             </svg>

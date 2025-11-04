@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronRight, Star, Award, Globe, Users, ShoppingBag, TestTube, Wrench, GraduationCap, MessageCircle, Languages } from 'lucide-react';
+import { ChevronRight, Star, Award, Globe, Users, ShoppingBag, TestTube, Wrench, GraduationCap, MessageCircle } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export default function GemstonHomepage() {
-  const [currentHeroImage, setCurrentHeroImage] = useState(0);
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
-  const [language, setLanguage] = useState('am'); // Default to Amharic
+   const [currentHeroImage, setCurrentHeroImage] = useState(0);
+   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+   const { language } = useLanguage();
 
   const translations = {
     am: {
@@ -227,22 +228,9 @@ export default function GemstonHomepage() {
     { number: "2,000+", label: t.studentsTrained }
   ];
 
-  const toggleLanguage = () => {
-    setLanguage(language === 'am' ? 'en' : 'am');
-  };
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Language Toggle Button */}
-      <div className="fixed top-4 right-4 z-50">
-        <button
-          onClick={toggleLanguage}
-          className="bg-white hover:bg-gray-100 text-gray-800 px-4 py-2 rounded-full shadow-lg flex items-center gap-2 transition"
-        >
-          <Languages className="w-5 h-5" />
-          <span className="font-semibold">{language === 'am' ? 'English' : 'አማርኛ'}</span>
-        </button>
-      </div>
 
       {/* Hero Section */}
       <section className="relative h-screen overflow-hidden">
