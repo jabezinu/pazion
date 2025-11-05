@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { Gem, ShoppingCart, GraduationCap, Wrench, Check, Star, Clock, Award, TrendingUp, Mail } from 'lucide-react';
+import { useLocation, Link } from 'react-router-dom';
+import { Gem, ShoppingCart, GraduationCap, Wrench, Check, Star, Clock, Award, TrendingUp, Mail, Phone, MapPin } from 'lucide-react';
 
 export default function Services() {
   const location = useLocation();
@@ -56,9 +56,9 @@ export default function Services() {
       id: "buying-selling",
       icon: ShoppingCart,
       title: "Buying & Selling Services",
-      description: "Connect with verified buyers and sellers worldwide. We facilitate secure transactions and provide market insights. Whether you're looking to purchase investment-grade gemstones or sell your collection, our platform offers complete transparency, professional valuation, and secure escrow services.",
+      description: "We buy and sell any kind of gemstone you have. Whether you're looking to purchase or sell gemstones of any type, call us or come to our office for immediate assistance. We cater to both local and international purchasers with secure transactions, professional valuation, worldwide shipping, and complete transparency.",
       price: "Commission-based",
-      priceNote: "Sellers: 10% commission on successful sales | Buyers: No fees | Free initial consultation and valuation",
+      priceNote: "Sellers: 10% commission on successful sales",
       features: [
         "Professional market analysis and price guidance", 
         "Verified buyer and seller matching worldwide",
@@ -70,7 +70,19 @@ export default function Services() {
         "Expert negotiation support and advisory"
       ],
       detailedInfo: {
-        process: "List your gemstones with professional photography and detailed descriptions. We verify authenticity, provide market valuation, and connect you with serious buyers. Our escrow service ensures secure payment before shipping. Buyers can browse authenticated inventory with confidence.",
+        process: (
+          <div>
+            {/* <p className="mb-4">Our buying and selling process ensures secure, transparent transactions:</p> */}
+            <ol className="list-decimal list-inside space-y-2 text-gray-700">
+              <li><strong>Initial Consultation & Valuation:</strong> We assess your gemstones in person and provide professional market valuation</li>
+              {/* <li><strong>Authentication & Documentation:</strong> Complete quality verification and certification (in-person testing only)</li> */}
+              <li><strong>Listing & Marketing:</strong> Professional photography and detailed descriptions for buyer presentation</li>
+              <li><strong>Buyer Matching & Negotiation:</strong> Connect with verified buyers and facilitate secure transactions</li>
+              <li><strong>Escrow & Delivery:</strong> Secure payment processing and insured shipping coordination</li>
+            </ol>
+            {/* <p className="mt-4 text-sm text-gray-600 italic">Note: All authentication and testing requires in-person assessment at our office; we do not perform testing using photography.</p> */}
+          </div>
+        ),
         markets: "We connect clients across North America, Europe, Asia, and the Middle East, giving you access to the world's most active gem markets.",
         guarantee: "30-day satisfaction guarantee • Authenticity verification • Insured shipping • Secure payment processing"
       },
@@ -364,12 +376,26 @@ export default function Services() {
                 </div> */}
 
                 {/* CTA Button */}
-                {/* <div className="text-center pt-8 border-t border-gray-200">
-                  <button className="group bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 px-10 rounded-xl text-lg font-bold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-2xl flex items-center mx-auto">
-                    <Mail className="w-5 h-5 mr-2 group-hover:animate-bounce" />
-                    Learn More About This Service
-                  </button>
-                </div> */}
+                {service.id === "buying-selling" && (
+                  <div className="text-center pt-8 border-t border-gray-200">
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                      <Link
+                        to="/contact"
+                        className="group bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 px-8 rounded-xl text-lg font-bold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-2xl flex items-center justify-center"
+                      >
+                        <Phone className="w-5 h-5 mr-2 group-hover:animate-bounce" />
+                        Call Us or Come to Our Office
+                      </Link>
+                      {/* <Link
+                        to="/contact"
+                        className="group bg-gradient-to-r from-green-600 to-teal-600 text-white py-4 px-8 rounded-xl text-lg font-bold hover:from-green-700 hover:to-teal-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-2xl flex items-center justify-center"
+                      >
+                        <MapPin className="w-5 h-5 mr-2 group-hover:animate-bounce" />
+                        Find Our Location
+                      </Link> */}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </section>
