@@ -12,7 +12,7 @@ export default function About() {
         }}></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight">About GemStone Pro</h1>
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight">About Pazion</h1>
             <p className="text-xl md:text-2xl text-blue-100 font-light">
               Your Trusted Partner in the World of Precious Gemstones
             </p>
@@ -33,7 +33,7 @@ export default function About() {
               </div>
               <div className="space-y-4 text-gray-600 leading-relaxed">
                 <p>
-                  Founded in 2010, GemStone Pro has been at the forefront of the gemstone industry, serving both local and international markets with unparalleled expertise and integrity.
+                  Founded in 2010, Pazion has been at the forefront of the gemstone industry, serving both local and international markets with unparalleled expertise and integrity.
                 </p>
                 <p>
                   Our journey began with a simple mission: to bridge the gap between gemstone enthusiasts, professionals, and the global market. Today, we are recognized as a trusted partner in the gemstone community.
@@ -167,7 +167,7 @@ export default function About() {
           <div className="bg-gradient-to-r from-slate-900 to-slate-800 rounded-3xl shadow-2xl p-12 text-center text-white">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Start Your Journey?</h2>
             {/* <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
-              Join thousands of satisfied clients who trust GemStone Pro for their gemstone needs
+              Join thousands of satisfied clients who trust Pazion for their gemstone needs
             </p> */}
             <Link to="/contact">
               <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 hover:transform hover:scale-105 shadow-lg">

@@ -3,13 +3,13 @@ export default function Testimonials() {
     {
       name: "John Smith",
       role: "Gemstone Dealer",
-      content: "GemStone Pro has been instrumental in expanding my international business. Their expertise and network are unmatched.",
+      content: "Pazion has been instrumental in expanding my international business. Their expertise and network are unmatched.",
       rating: 5
     },
     {
       name: "Maria Garcia",
       role: "Jewelry Designer",
-      content: "The training courses provided by GemStone Pro have significantly improved my gemstone identification skills.",
+      content: "The training courses provided by Pazion have significantly improved my gemstone identification skills.",
       rating: 5
     },
     {
