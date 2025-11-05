@@ -21,7 +21,7 @@ export default function Services() {
       title: "Gemstone Testing",
       description: "Professional gemstone identification and quality assessment using state-of-the-art equipment and expert knowledge. ",
       price: "Starting from 400ETB",
-      priceNote: "Basic identification from $50 | Full reports with photography from $150 | Rush service available",
+      priceNote: "Full reports of testing within 24 hours",
       features: [
         "Comprehensive gem species and variety identification", 
         "Professional quality grading (color, clarity, cut, carat)",
@@ -32,8 +32,19 @@ export default function Services() {
         "Secure handling with full insurance coverage"
       ],
       detailedInfo: {
-        process: "Our testing process involves multiple stages of analysis. First, we conduct visual inspection and basic gemological tests. Then, we use advanced equipment including spectrometers, refractometers, and microscopes for in-depth analysis. Finally, our certified experts compile comprehensive reports with photographic documentation.",
-        turnaround: "Standard testing: 3-5 business days | Rush service: 1-2 business days (additional fee)",
+        process: (
+          <div>
+            {/* <p className="mb-4">Our testing process involves multiple stages of analysis conducted in person at our office:</p> */}
+            <ol className="list-decimal list-inside space-y-2 text-gray-700">
+              <li><strong>Initial Consultation & Visual Inspection:</strong> We examine the gemstone visually and discuss your requirements</li>
+              <li><strong>Basic Gemological Testing:</strong> Standard tests including specific gravity, hardness, and refractive index measurements</li>
+              <li><strong>Advanced Equipment Analysis:</strong> In-depth analysis using spectrometers, refractometers, microscopes, and other specialized tools</li>
+              <li><strong>Expert Report Compilation:</strong> Our certified gemologists compile a comprehensive report with findings and recommendations</li>
+            </ol>
+            <p className="mt-4 text-sm text-gray-600 italic">Note: We do not perform testing using photography; all assessments require the gemstone to be brought to our office.</p>
+          </div>
+        ),
+        turnaround: "All testing completed within 24 hours",
         equipment: "Spectrometer • Refractometer • Gemological Microscope • UV Light • Dichroscope • Polariscope"
       },
       testimonials: [
@@ -248,12 +259,6 @@ export default function Services() {
                 </div>
 
                 {/* Equipment/Guarantee/Benefits */}
-                {service.detailedInfo.equipment && (
-                  <div className="bg-gray-50 p-6 rounded-2xl mb-8 border border-gray-200">
-                    <h4 className="text-xl font-bold text-gray-900 mb-4">Professional Equipment Used</h4>
-                    <p className="text-gray-700 leading-relaxed">{service.detailedInfo.equipment}</p>
-                  </div>
-                )}
 
                 {service.detailedInfo.guarantee && (
                   <div className="bg-green-50 p-6 rounded-2xl mb-8 border border-green-200">
