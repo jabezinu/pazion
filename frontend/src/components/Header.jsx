@@ -17,10 +17,8 @@ export default function Header() {
           <ul className="hidden md:flex space-x-6">
             <li><Link to="/" className="text-gray-700 hover:text-blue-600">{translations.home}</Link></li>
             <li><Link to="/gemstones" className="text-gray-700 hover:text-blue-600">{translations.gemstones}</Link></li>
-            <li className="relative">
+            <li className="relative" onMouseEnter={() => setIsServicesOpen(true)} onMouseLeave={() => setIsServicesOpen(false)}>
               <button
-                onMouseEnter={() => setIsServicesOpen(true)}
-                onMouseLeave={() => setIsServicesOpen(false)}
                 className="text-gray-700 hover:text-blue-600 flex items-center"
               >
                 {translations.services}
