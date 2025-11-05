@@ -112,8 +112,8 @@ export default function About() {
             {[
               { number: '15+', label: 'Years Experience' },
               { number: '10K+', label: 'Satisfied Clients' },
-              { number: '50+', label: 'Expert Team' },
-              { number: '100+', label: 'Countries Served' }
+              // { number: '50+', label: 'Expert Team' },
+              { number: '10+', label: 'Countries Served' }
             ].map((stat, index) => (
               <div key={index} className="bg-white rounded-xl shadow-md p-6 text-center hover:shadow-lg transition-shadow duration-300">
                 <div className="text-4xl font-bold text-blue-600 mb-2">{stat.number}</div>
@@ -124,40 +124,84 @@ export default function About() {
 
           {/* Staff Members Section */}
           <div className="mb-20">
-            <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">Our Team</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Meet Our Experts</h2>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto">Our team of dedicated professionals brings together decades of experience in the gemstone industry.</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
               {[
                 {
                   name: 'David Thompson',
                   role: 'Training Director',
-                  image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
-                  description: 'Leads our certification programs and professional development.'
+                  image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face',
+                  description: 'Leads our certification programs and professional development.',
+                  expertise: ['Gemology', 'Education', 'Certification'],
+                  social: {
+                    linkedin: '#',
+                    twitter: '#',
+                  }
                 },
                 {
                   name: 'Lisa Park',
                   role: 'Client Relations Manager',
-                  image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face',
-                  description: 'Dedicated to providing exceptional service to our clients worldwide.'
+                  image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=face',
+                  description: 'Dedicated to providing exceptional service to our clients worldwide.',
+                  expertise: ['Client Service', 'Global Markets', 'Consulting'],
+                  social: {
+                    linkedin: '#',
+                    twitter: '#',
+                  }
                 },
                 {
                   name: 'Robert Kim',
                   role: 'Technical Specialist',
-                  image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face',
-                  description: 'Manages our state-of-the-art equipment and laboratory operations.'
+                  image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face',
+                  description: 'Manages our state-of-the-art equipment and laboratory operations.',
+                  expertise: ['Lab Operations', 'Gemstone Testing', 'Research'],
+                  social: {
+                    linkedin: '#',
+                    twitter: '#',
+                  }
                 }
               ].map((member, index) => (
-                <div key={index} className="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition-all duration-300 hover:transform hover:scale-105 text-center">
-                  <div className="relative mb-6">
-                    <img src={member.image} alt={member.name} className="w-24 h-24 rounded-full object-cover mx-auto shadow-lg border-4 border-blue-100" />
-                    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center">
-                      <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
+                <div key={index} className="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500">
+                  <div className="aspect-w-4 aspect-h-5">
+                    <img 
+                      src={member.image} 
+                      alt={member.name} 
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  </div>
+                  
+                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
+                    <h3 className="text-2xl font-bold mb-2">{member.name}</h3>
+                    <p className="text-blue-300 font-medium mb-3">{member.role}</p>
+                    <p className="text-gray-300 mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                      {member.description}
+                    </p>
+                    
+                    <div className="flex flex-wrap gap-2 mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">
+                      {member.expertise.map((skill, i) => (
+                        <span key={i} className="px-3 py-1 bg-blue-600/30 rounded-full text-sm text-blue-200">
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                    
+                    <div className="flex gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-300">
+                      <a href={member.social.linkedin} className="text-white hover:text-blue-400 transition-colors">
+                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                        </svg>
+                      </a>
+                      <a href={member.social.twitter} className="text-white hover:text-blue-400 transition-colors">
+                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>
+                        </svg>
+                      </a>
                     </div>
                   </div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">{member.name}</h3>
-                  <p className="text-blue-600 font-semibold mb-4 text-sm">{member.role}</p>
-                  <p className="text-gray-600 text-sm leading-relaxed">{member.description}</p>
                 </div>
               ))}
             </div>
