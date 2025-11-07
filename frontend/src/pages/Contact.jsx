@@ -1,12 +1,54 @@
 import { useState } from 'react';
 
 export default function Contact() {
+  const [language, setLanguage] = useState('en');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     subject: '',
     message: ''
   });
+
+  const translations = {
+    en: {
+      title: 'Contact Us',
+      getInTouch: 'Get In Touch',
+      description: "Have questions about our services or want to discuss a potential partnership? We'd love to hear from you. Send us a message and we'll respond as soon as possible.",
+      address: 'Address',
+      addressValue: '123 Gem Street, Diamond City, DC 12345',
+      phone: 'Phone',
+      phoneValue: '+1 (555) 123-4567',
+      email: 'Email',
+      emailValue: 'info@gemstonepro.com',
+      businessHours: 'Business Hours',
+      businessHoursValue: 'Mon - Fri: 9:00 AM - 6:00 PM',
+      name: 'Name',
+      subject: 'Subject',
+      message: 'Message',
+      sendMessage: 'Send Message',
+      successMessage: 'Thank you for your message! We will get back to you soon.'
+    },
+    am: {
+      title: 'ያግኙን',
+      getInTouch: 'ተገናኝ',
+      description: 'ስለ አገልግሎታችን ጥያቄዎች አሉዎት ወይም ስለ ሊሆን የሚችል ሽርክና መወያየት ይፈልጋሉ? ከእርስዎ መስማት እንፈልጋለን። መልእክት ይላኩልን እና በተቻለ ፍጥነት እንመልሳለን።',
+      address: 'አድራሻ',
+      addressValue: '123 የጌም ጎዳና፣ ዳይመንድ ከተማ፣ ዲሲ 12345',
+      phone: 'ስልክ',
+      phoneValue: '+1 (555) 123-4567',
+      email: 'ኢሜይል',
+      emailValue: 'info@gemstonepro.com',
+      businessHours: 'የስራ ሰዓት',
+      businessHoursValue: 'ሰኞ - አርብ፡ ከጠዋቱ 9:00 - ከምሽቱ 6:00',
+      name: 'ስም',
+      subject: 'ርዕሰ ጉዳይ',
+      message: 'መልእክት',
+      sendMessage: 'መልእክት ላክ',
+      successMessage: 'ለመልእክትዎ እናመሰግናለን! በቅርቡ እናገኝዎታለን።'
+    }
+  };
+
+  const t = translations[language];
 
   const handleChange = (e) => {
     setFormData({
@@ -17,60 +59,67 @@ export default function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission here
     console.log('Form submitted:', formData);
-    alert('Thank you for your message! We will get back to you soon.');
+    alert(t.successMessage);
     setFormData({ name: '', email: '', subject: '', message: '' });
   };
 
   return (
     <div className="container mx-auto px-4 py-16">
-      <h1 className="text-4xl font-bold text-center mb-12 text-gray-800">Contact Us</h1>
+      <div className="flex justify-end mb-6">
+        <button
+          onClick={() => setLanguage(language === 'en' ? 'am' : 'en')}
+          className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300 font-semibold"
+        >
+          {language === 'en' ? 'አማርኛ' : 'English'}
+        </button>
+      </div>
+
+      <h1 className="text-4xl font-bold text-center mb-12 text-gray-800">{t.title}</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
         <div>
-          <h2 className="text-2xl font-semibold mb-6 text-gray-800">Get In Touch</h2>
+          <h2 className="text-2xl font-semibold mb-6 text-gray-800">{t.getInTouch}</h2>
           <p className="text-gray-600 mb-8">
-            Have questions about our services or want to discuss a potential partnership?
-            We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+            {t.description}
           </p>
 
           <div className="space-y-4">
             <div className="flex items-center">
               <span className="text-blue-600 mr-3">📍</span>
               <div>
-                <p className="font-semibold">Address</p>
-                <p className="text-gray-600">123 Gem Street, Diamond City, DC 12345</p>
+                <p className="font-semibold">{t.address}</p>
+                <p className="text-gray-600">{t.addressValue}</p>
               </div>
             </div>
             <div className="flex items-center">
               <span className="text-blue-600 mr-3">📞</span>
               <div>
-                <p className="font-semibold">Phone</p>
-                <p className="text-gray-600">+1 (555) 123-4567</p>
+                <p className="font-semibold">{t.phone}</p>
+                <p className="text-gray-600">{t.phoneValue}</p>
               </div>
             </div>
             <div className="flex items-center">
               <span className="text-blue-600 mr-3">✉️</span>
               <div>
-                <p className="font-semibold">Email</p>
-                <p className="text-gray-600">info@gemstonepro.com</p>
+                <p className="font-semibold">{t.email}</p>
+                <p className="text-gray-600">{t.emailValue}</p>
               </div>
             </div>
             <div className="flex items-center">
               <span className="text-blue-600 mr-3">🕒</span>
               <div>
-                <p className="font-semibold">Business Hours</p>
-                <p className="text-gray-600">Mon - Fri: 9:00 AM - 6:00 PM</p>
+                <p className="font-semibold">{t.businessHours}</p>
+                <p className="text-gray-600">{t.businessHoursValue}</p>
               </div>
             </div>
           </div>
         </div>
 
         <div>
-          <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md">
+          <div className="bg-white p-6 rounded-lg shadow-md">
             <div className="mb-4">
-              <label htmlFor="name" className="block text-gray-700 font-semibold mb-2">Name</label>
+              <label htmlFor="name" className="block text-gray-700 font-semibold mb-2">{t.name}</label>
               <input
                 type="text"
                 id="name"
@@ -82,7 +131,7 @@ export default function Contact() {
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="email" className="block text-gray-700 font-semibold mb-2">Email</label>
+              <label htmlFor="email" className="block text-gray-700 font-semibold mb-2">{t.email}</label>
               <input
                 type="email"
                 id="email"
@@ -94,7 +143,7 @@ export default function Contact() {
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="subject" className="block text-gray-700 font-semibold mb-2">Subject</label>
+              <label htmlFor="subject" className="block text-gray-700 font-semibold mb-2">{t.subject}</label>
               <input
                 type="text"
                 id="subject"
@@ -106,7 +155,7 @@ export default function Contact() {
               />
             </div>
             <div className="mb-6">
-              <label htmlFor="message" className="block text-gray-700 font-semibold mb-2">Message</label>
+              <label htmlFor="message" className="block text-gray-700 font-semibold mb-2">{t.message}</label>
               <textarea
                 id="message"
                 name="message"
@@ -118,12 +167,12 @@ export default function Contact() {
               ></textarea>
             </div>
             <button
-              type="submit"
+              onClick={handleSubmit}
               className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition duration-300 font-semibold"
             >
-              Send Message
+              {t.sendMessage}
             </button>
-          </form>
+          </div>
         </div>
       </div>
     </div>
