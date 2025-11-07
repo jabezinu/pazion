@@ -27,7 +27,8 @@ export default function Contact() {
       subject: 'Subject',
       message: 'Message',
       sendMessage: 'Send Message',
-      successMessage: 'Thank you for your message! We will get back to you soon.'
+      successMessage: 'Thank you for your message! We will get back to you soon.',
+      reviewOnGoogleMaps: 'Review us on Google Maps'
     },
     am: {
       title: 'ያግኙን',
@@ -45,7 +46,8 @@ export default function Contact() {
       subject: 'ርዕሰ ጉዳይ',
       message: 'መልእክት',
       sendMessage: 'መልእክት ላክ',
-      successMessage: 'ለመልእክትዎ እናመሰግናለን! በቅርቡ እናገኝዎታለን።'
+      successMessage: 'ለመልእክትዎ እናመሰግናለን! በቅርቡ እናገኝዎታለን።',
+      reviewOnGoogleMaps: 'በጉግል ካርታ ላይ አስተያየት ስጡን'
     }
   };
 
@@ -105,6 +107,24 @@ export default function Contact() {
                 <p className="text-gray-600">{t.businessHoursValue}</p>
               </div>
             </div>
+          </div>
+
+          <div className="mt-8">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509374!2d144.9537353153168!3d-37.816279742021665!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577d4a32ddf9f0!2sMelbourne%20CBD%2C%20Victoria%2C%20Australia!5e0!3m2!1sen!2s!4v1633072800000!5m2!1sen!2s"
+              width="100%"
+              height="300"
+              style={{ border: 0 }}
+              allowFullScreen=""
+              loading="lazy"
+              className="rounded-lg shadow-md"
+            ></iframe>
+            <button
+              onClick={() => window.open('https://www.google.com/maps/place/123+Gem+Street,+Diamond+City,+DC+12345', '_blank')}
+              className="mt-4 w-full bg-red-600 text-white py-3 px-4 rounded-lg hover:bg-red-700 transition duration-300 font-semibold"
+            >
+              {t.reviewOnGoogleMaps}
+            </button>
           </div>
         </div>
 
