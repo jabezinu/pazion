@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Search, Filter, X, ChevronDown, Star, Heart, ShoppingCart, Eye, Languages } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export default function GemstonesPage() {
-  const [language, setLanguage] = useState('am');
+  const { language } = useLanguage();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedQuality, setSelectedQuality] = useState('all');
@@ -289,9 +290,6 @@ export default function GemstonesPage() {
     );
   };
 
-  const toggleLanguage = () => {
-    setLanguage(language === 'am' ? 'en' : 'am');
-  };
 
   // Filter and sort logic
   const filteredGemstones = gemstones.filter(gem => {
@@ -312,16 +310,6 @@ export default function GemstonesPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Language Toggle */}
-      <div className="fixed top-4 right-4 z-50">
-        <button
-          onClick={toggleLanguage}
-          className="bg-white hover:bg-gray-100 text-gray-800 px-4 py-2 rounded-full shadow-lg flex items-center gap-2 transition"
-        >
-          <Languages className="w-5 h-5" />
-          <span className="font-semibold">{language === 'am' ? 'English' : 'አማርኛ'}</span>
-        </button>
-      </div>
 
       {/* Search and Filters Bar */}
       <div className="bg-white shadow-md sticky top-16 z-40">
