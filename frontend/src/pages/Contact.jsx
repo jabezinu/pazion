@@ -37,7 +37,7 @@ export default function Contact() {
       address: 'አድራሻ',
       addressValue: '123 የጌም ጎዳና፣ ዳይመንድ ከተማ፣ ዲሲ 12345',
       phone: 'ስልክ',
-      phoneValue: '+1 (555) 123-4567',
+      phoneValue: '+251 92 477 1949',
       email: 'ኢሜይል',
       emailValue: 'info@gemstonepro.com',
       businessHours: 'የስራ ሰዓት',
