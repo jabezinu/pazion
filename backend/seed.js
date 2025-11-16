@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import mongoose from 'mongoose';
 import Gemstone from './models/Gemstone.js';
 
@@ -150,7 +151,7 @@ const gemstonesData = [
 
 async function seedDatabase() {
   try {
-    await mongoose.connect('mongodb+srv://admin:admin@cluster0.r86rdl3.mongodb.net/?appName=Cluster0');
+    await mongoose.connect(process.env.MONGODB_URI);
     console.log('Connected to MongoDB');
 
     // Clear existing data
