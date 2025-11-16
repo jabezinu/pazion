@@ -94,7 +94,7 @@ const coursesData = [
   {
     name: "Gemology Fundamentals",
     duration: "4 weeks",
-    price: "$299",
+    price: "299 ETB",
     level: "Beginner",
     description: "Introduction to gem identification, basic properties, and industry terminology",
     image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop"
@@ -102,7 +102,7 @@ const coursesData = [
   {
     name: "Advanced Gem Identification",
     duration: "8 weeks",
-    price: "$699",
+    price: "699 ETB",
     level: "Intermediate",
     description: "Master advanced testing techniques and equipment operation",
     image: "https://images.unsplash.com/photo-1605106702734-205df224ecce?w=400&h=300&fit=crop"
@@ -110,7 +110,7 @@ const coursesData = [
   {
     name: "Professional Gemologist Certification",
     duration: "16 weeks",
-    price: "$1,299",
+    price: "1299 ETB",
     level: "Advanced",
     description: "Comprehensive professional training with industry certification",
     image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=400&h=300&fit=crop"
@@ -118,7 +118,7 @@ const coursesData = [
   {
     name: "Gem Business & Marketing",
     duration: "6 weeks",
-    price: "$499",
+    price: "499 ETB",
     level: "All Levels",
     description: "Learn to start and grow your gemstone business",
     image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop"

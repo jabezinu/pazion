@@ -85,7 +85,7 @@ export default function Services() {
           id: "gemstone-testing",
           title: "Gemstone Testing",
           description: "Professional gemstone identification and quality assessment using state-of-the-art equipment and expert knowledge.",
-          price: "Starting from 400ETB",
+          price: "Starting from 400 ETB",
           priceNote: "Full reports of testing within 24 hours",
           features: [
             "Comprehensive gem species and variety identification",
@@ -146,10 +146,10 @@ export default function Services() {
             "Job placement assistance and industry connections"
           ],
           courses: [
-            { name: "Gemology Fundamentals", duration: "4 weeks", price: "$299", level: "Beginner", desc: "Introduction to gem identification, basic properties, and industry terminology" },
-            { name: "Advanced Gem Identification", duration: "8 weeks", price: "$699", level: "Intermediate", desc: "Master advanced testing techniques and equipment operation" },
-            { name: "Professional Gemologist Certification", duration: "16 weeks", price: "$1,299", level: "Advanced", desc: "Comprehensive professional training with industry certification" },
-            { name: "Gem Business & Marketing", duration: "6 weeks", price: "$499", level: "All Levels", desc: "Learn to start and grow your gemstone business" }
+            { name: "Gemology Fundamentals", duration: "4 weeks", price: "299 ETB", level: "Beginner", desc: "Introduction to gem identification, basic properties, and industry terminology" },
+            { name: "Advanced Gem Identification", duration: "8 weeks", price: "699 ETB", level: "Intermediate", desc: "Master advanced testing techniques and equipment operation" },
+            { name: "Professional Gemologist Certification", duration: "16 weeks", price: "1299 ETB", level: "Advanced", desc: "Comprehensive professional training with industry certification" },
+            { name: "Gem Business & Marketing", duration: "6 weeks", price: "499 ETB", level: "All Levels", desc: "Learn to start and grow your gemstone business" }
           ],
           benefits: "Small class sizes • Professional equipment access • Career networking events"
         },
@@ -257,10 +257,10 @@ export default function Services() {
             "የስራ ምደባ እርዳታ እና የኢንዱስትሪ ግንኙነቶች"
           ],
           courses: [
-            { name: "የጌሞሎጂ መሰረታዊ ነገሮች", duration: "4 ሳምንታት", price: "$299", level: "ጀማሪ", desc: "የዕንቁ መለያ፣ መሰረታዊ ባህሪያት እና የኢንዱስትሪ ቃላት ማስተዋወቂያ" },
-            { name: "የላቀ የዕንቁ መለያ", duration: "8 ሳምንታት", price: "$699", level: "መካከለኛ", desc: "የላቁ የምርመራ ቴክኒኮችን እና የመሳሪያ አሠራርን ይማሩ" },
-            { name: "ሙያዊ የጌሞሎጂስት ምስክር ወረቀት", duration: "16 ሳምንታት", price: "$1,299", level: "ላቀ", desc: "በኢንዱስትሪ ምስክር ወረቀት አጠቃላይ ሙያዊ ስልጠና" },
-            { name: "የዕንቁ ንግድ እና ግብይት", duration: "6 ሳምንታት", price: "$499", level: "ሁሉም ደረጃዎች", desc: "የዕንቁ ንግድዎን እንዴት እንደሚጀምሩ እና እንደሚያሳድጉ ይማሩ" }
+            { name: "የጌሞሎጂ መሰረታዊ ነገሮች", duration: "4 ሳምንታት", price: "299 ETB", level: "ጀማሪ", desc: "የዕንቁ መለያ፣ መሰረታዊ ባህሪያት እና የኢንዱስትሪ ቃላት ማስተዋወቂያ" },
+            { name: "የላቀ የዕንቁ መለያ", duration: "8 ሳምንታት", price: "699 ETB", level: "መካከለኛ", desc: "የላቁ የምርመራ ቴክኒኮችን እና የመሳሪያ አሠራርን ይማሩ" },
+            { name: "ሙያዊ የጌሞሎጂስት ምስክር ወረቀት", duration: "16 ሳምንታት", price: "1299 ETB", level: "ላቀ", desc: "በኢንዱስትሪ ምስክር ወረቀት አጠቃላይ ሙያዊ ስልጠና" },
+            { name: "የዕንቁ ንግድ እና ግብይት", duration: "6 ሳምንታት", price: "499 ETB", level: "ሁሉም ደረጃዎች", desc: "የዕንቁ ንግድዎን እንዴት እንደሚጀምሩ እንደሚያሳድጉ ይማሩ" }
           ],
           benefits: "ትንሽ ተማሪ ነው ምንቀበለው • የሙያ መሳሪያ መዳረሻ • አዳዲስ የሥራ ሰዎች ሚገኙበት"
         },
@@ -493,7 +493,7 @@ export default function Services() {
                                 className="w-full h-32 object-cover rounded-md mb-4"
                               />
                               <h4 className="font-bold text-red-900 mb-2">{equipment.name}</h4>
-                              <p className="text-red-800 text-sm mb-2">{equipment.price}</p>
+                              <p className="text-red-800 text-sm mb-2">{equipment.price} ETB</p>
                               <p className="text-red-700 text-sm">{equipment.description}</p>
                             </div>
                           ))}
