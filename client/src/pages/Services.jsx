@@ -3,12 +3,15 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import courseService from '../services/courseService';
+import equipmentService from '../services/equipmentService';
 
 export default function Services() {
   const { language } = useLanguage();
   const location = useLocation();
   const [courses, setCourses] = useState([]);
   const [coursesLoading, setCoursesLoading] = useState(true);
+  const [equipments, setEquipments] = useState([]);
+  const [equipmentsLoading, setEquipmentsLoading] = useState(true);
 
   useEffect(() => {
     if (location.hash) {
@@ -32,6 +35,21 @@ export default function Services() {
     };
 
     fetchCourses();
+  }, []);
+
+  useEffect(() => {
+    const fetchEquipments = async () => {
+      try {
+        const data = await equipmentService.getAll();
+        setEquipments(data);
+      } catch (error) {
+        console.error('Failed to fetch equipments:', error);
+      } finally {
+        setEquipmentsLoading(false);
+      }
+    };
+
+    fetchEquipments();
   }, []);
 
   const translations = {
@@ -455,20 +473,37 @@ export default function Services() {
 
                 {service.id === 'machines' && (
                   <>
-                    {/* Equipment Categories */}
+                    {/* Available Equipments */}
                     <div className="mb-12">
                       <div className="flex items-center mb-6">
                         <Wrench className="w-6 h-6 text-red-600 mr-3" />
-                        <h3 className="text-2xl font-bold text-gray-900">{t.equipmentCategories}</h3>
+                        <h3 className="text-2xl font-bold text-gray-900">Available Equipments</h3>
                       </div>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {service.categories.map((category, idx) => (
-                          <div key={idx} className="bg-red-50 rounded-lg p-6">
-                            <h4 className="font-bold text-red-900 mb-3">{category.name}</h4>
-                            <p className="text-red-800 text-sm">{category.items}</p>
-                          </div>
-                        ))}
-                      </div>
+                      {equipmentsLoading ? (
+                        <div className="flex justify-center items-center h-32">
+                          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600"></div>
+                        </div>
+                      ) : (
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                          {equipments.map((equipment, idx) => (
+                            <div key={equipment._id || idx} className="bg-red-50 rounded-lg p-6">
+                              <img
+                                src={equipment.image}
+                                alt={equipment.name}
+                                className="w-full h-32 object-cover rounded-md mb-4"
+                              />
+                              <h4 className="font-bold text-red-900 mb-2">{equipment.name}</h4>
+                              <p className="text-red-800 text-sm mb-2">{equipment.price}</p>
+                              <p className="text-red-700 text-sm">{equipment.description}</p>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                      {equipments.length === 0 && !equipmentsLoading && (
+                        <div className="text-center py-8">
+                          <p className="text-red-600">No equipments available at the moment.</p>
+                        </div>
+                      )}
                     </div>
 
                     {/* Trusted Brands */}
