@@ -40,7 +40,7 @@ export default function Layout({ children }) {
       <aside
         className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-xl border-r border-gray-200 transform transition-transform duration-300 ease-in-out md:translate-x-0 ${
           isMobileOpen ? 'translate-x-0' : '-translate-x-full'
-        } ${isCollapsed ? 'md:w-16' : 'md:w-64'}`}
+        } ${isCollapsed ? 'md:w-20' : 'md:w-64'}`}
       >
         <div className="flex flex-col h-full">
           {/* Header */}
@@ -63,13 +63,14 @@ export default function Layout({ children }) {
                 key={item.to}
                 to={item.to}
                 onClick={closeMobileSidebar}
+                title={isCollapsed ? item.label : undefined}
                 className={`flex items-center px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${
                   location.pathname === item.to || (item.to !== '/' && location.pathname.startsWith(item.to))
                     ? 'bg-indigo-50 text-indigo-700 border-r-2 border-indigo-600 shadow-sm'
                     : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
-                } ${isCollapsed ? 'justify-center px-3' : ''}`}
+                } ${isCollapsed ? 'justify-center px-4' : ''}`}
               >
-                <item.icon className={`text-lg ${isCollapsed ? '' : 'mr-3'}`} />
+                <item.icon className={`${isCollapsed ? 'text-xl' : 'text-lg mr-3'}`} />
                 {!isCollapsed && <span>{item.label}</span>}
               </Link>
             ))}
@@ -78,7 +79,7 @@ export default function Layout({ children }) {
       </aside>
 
       {/* Main content */}
-      <div className={`flex-1 transition-all duration-300 md:${isCollapsed ? 'ml-16' : 'ml-64'}`}>
+      <div className={`flex-1 transition-all duration-300 md:${isCollapsed ? 'ml-20' : 'ml-64'}`}>
         {/* Mobile header */}
         <div className="md:hidden bg-white shadow-sm border-b border-gray-200 px-4 py-4 flex items-center">
           <button
