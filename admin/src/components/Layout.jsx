@@ -38,7 +38,7 @@ export default function Layout({ children }) {
 
       {/* Sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-xl border-r border-gray-200 transform transition-transform duration-300 ease-in-out md:translate-x-0 md:static md:inset-0 ${
+        className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-xl border-r border-gray-200 transform transition-transform duration-300 ease-in-out md:translate-x-0 ${
           isMobileOpen ? 'translate-x-0' : '-translate-x-full'
         } ${isCollapsed ? 'md:w-16' : 'md:w-64'}`}
       >
@@ -78,7 +78,7 @@ export default function Layout({ children }) {
       </aside>
 
       {/* Main content */}
-      <div className="flex-1 transition-all duration-300">
+      <div className={`flex-1 transition-all duration-300 md:${isCollapsed ? 'ml-16' : 'ml-64'}`}>
         {/* Mobile header */}
         <div className="md:hidden bg-white shadow-sm border-b border-gray-200 px-4 py-4 flex items-center">
           <button
