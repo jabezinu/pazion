@@ -89,7 +89,7 @@ export default function GemstonHomepage() {
     },
     en: {
       // Hero Section
-      heroTitle: "Pazion - Shine Like A Gemstone",
+      heroTitle: "KalGemstone - Shine Like A Gemstone",
       heroSubtitle: "From Mine to International Market",
       heroDescription: "Buying, Selling, Testing & Training - Serving Local & International Markets Since 2015 GC",
       browseGemstones: "Browse Gemstones",

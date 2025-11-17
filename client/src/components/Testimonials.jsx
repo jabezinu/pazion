@@ -151,7 +151,7 @@ export default function Testimonials() {
                   value={formData.text}
                   onChange={handleChange}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Share your experience with Pazion..."
+                  placeholder="Share your experience with KalGemstone..."
                 />
               </div>
               <div className="flex justify-end">

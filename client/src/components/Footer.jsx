@@ -9,7 +9,7 @@ export default function Footer() {
             <div>
               <div className="flex items-center mb-4">
                 <Award className="w-8 h-8 text-blue-400" />
-                <span className="ml-2 text-xl font-bold text-white">Pazion</span>
+                <span className="ml-2 text-xl font-bold text-white">KalGemstone</span>
               </div>
               <p className="text-gray-400 mb-4">
                 Your trusted partner for premium gemstones since 2009.
@@ -67,7 +67,7 @@ export default function Footer() {
                 </div>
                 <div className="flex items-center">
                   <Mail className="w-5 h-5 text-blue-400 mr-3 flex-shrink-0" />
-                  <span>info@pazion.com</span>
+                  <span>info@kalgemstone.com</span>
                 </div>
               </div>
             </div>
@@ -75,7 +75,7 @@ export default function Footer() {
 
           <div className="border-t border-gray-700 pt-8 text-center">
             <p className="text-gray-400">
-              © 2024 Pazion. All rights reserved. | Designed with ❤️ for gemstone enthusiasts
+              © 2024 KalGemstone - ቃልጄምስቶን. All rights reserved. | Designed with ❤️ for gemstone enthusiasts
             </p>
           </div>
         </div>

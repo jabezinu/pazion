@@ -8,13 +8,13 @@ export default function About() {
   const content = {
     en: {
       hero: {
-        title: 'About Pazion',
+        title: 'About KalGemstone - Shine Like A Gemstone',
         subtitle: 'Your Trusted Partner in the World of Precious Gemstones'
       },
       story: {
         title: 'Our Story',
         paragraphs: [
-          'Founded in 2015 GC., Pazion has been at the forefront of the gemstone industry, serving both local and international markets with unparalleled expertise and integrity.',
+          'Founded in 2015 GC., KalGemstone has been at the forefront of the gemstone industry, serving both local and international markets with unparalleled expertise and integrity.',
           'Our journey began with a simple mission: to bridge the gap between gemstone enthusiasts, professionals, and the global market. Today, we are recognized as a trusted partner in the gemstone community.',
           'With 10+ years of experience and a team of certified gemologists, we provide comprehensive services that cater to every aspect of the gemstone business.'
         ]
@@ -47,8 +47,8 @@ export default function About() {
         ]
       },
       stats: [
-        { number: '15+', label: 'Years Experience' },
-        { number: '10K+', label: 'Satisfied Clients' },
+        { number: '10+', label: 'Years Experience' },
+        { number: '340+', label: 'Satisfied Clients' },
         { number: '10+', label: 'Countries Served' }
       ],
       team: {
@@ -82,7 +82,7 @@ export default function About() {
     },
     am: {
       hero: {
-        title: 'ስለ ጳዝዮን',
+        title: 'ስለ ቃልጄምስቶን',
         // subtitle: 'በከበሩ እንቁዎች አለም ውስጥ የታመነ አጋርዎ'
       },
       story: {

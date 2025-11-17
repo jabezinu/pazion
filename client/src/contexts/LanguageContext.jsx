@@ -43,7 +43,7 @@ export const LanguageProvider = ({ children }) => {
     },
     en: {
       // Navigation
-      brandName: "Pazion",
+      brandName: "KalGemstone",
       home: "Home",
       gemstones: "Gemstones",
       services: "Services",
