@@ -29,7 +29,7 @@ export const LanguageProvider = ({ children }) => {
   const translations = {
     am: {
       // Navigation
-      brandName: "ጳዝዮን",
+      brandName: "ቃልጄምስቶን",
       home: "መነሻ",
       gemstones: "መአድኖች",
       services: "አገልግሎት",

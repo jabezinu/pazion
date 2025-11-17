@@ -49,7 +49,7 @@ export default function About() {
       stats: [
         { number: '10+', label: 'Years Experience' },
         { number: '340+', label: 'Satisfied Clients' },
-        { number: '10+', label: 'Countries Served' }
+        { number: '17+', label: 'Countries Served' }
       ],
       team: {
         title: 'Meet Our Experts',

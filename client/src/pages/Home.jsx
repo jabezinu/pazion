@@ -17,7 +17,7 @@ export default function GemstonHomepage() {
   const translations = {
     am: {
       // Hero Section
-      heroTitle: "ጳዝዮን - ለመአድን ንግዶ የታመነ አጋር",
+      heroTitle: "ቃልጄምስቶን - ለመአድን ንግዶ የታመነ አጋር",
       heroSubtitle: "ከማዕድን ቁፋሮ እስከ አለም አቀፍ ገበያ",
       heroDescription: "መግዛት፣ መሸጥ፣ መመርመር እና ስልጠና - ከ2008 ጀምሮ የሀገር ውስጥና አለም አቀፍ ገበያዎችን እናገለግላለን",
       browseGemstones: "መኣድናትን ለማየት",
