@@ -1,6 +1,6 @@
-import Gemstone from '../models/Gemstone.js';
-import { v2 as cloudinary } from 'cloudinary';
-import multer from 'multer';
+const Gemstone = require('../models/Gemstone.js');
+const { v2: cloudinary } = require('cloudinary');
+const multer = require('multer');
 
 // Configure multer for memory storage
 const storage = multer.memoryStorage();
@@ -21,10 +21,10 @@ const uploadToCloudinary = (buffer) => {
 };
 
 // Export multer upload middleware
-export { upload };
+module.exports.upload = upload;
 
 // Get all gemstones
-export async function getAllGemstones(req, res) {
+module.exports.getAllGemstones = async function(req, res) {
   try {
     const gemstones = await Gemstone.find();
     res.json(gemstones);
@@ -34,7 +34,7 @@ export async function getAllGemstones(req, res) {
 };
 
 // Get single gemstone
-export async function getGemstoneById(req, res) {
+module.exports.getGemstoneById = async function(req, res) {
   try {
     const gemstone = await Gemstone.findById(req.params.id);
     if (!gemstone) {
@@ -47,7 +47,7 @@ export async function getGemstoneById(req, res) {
 };
 
 // Create gemstone
-export async function createGemstone(req, res) {
+module.exports.createGemstone = async function(req, res) {
   try {
     let imageUrl = '';
     if (req.file) {
@@ -68,7 +68,7 @@ export async function createGemstone(req, res) {
 };
 
 // Update gemstone
-export async function updateGemstone(req, res) {
+module.exports.updateGemstone = async function(req, res) {
   try {
     let updateData = { ...req.body };
 
@@ -92,7 +92,7 @@ export async function updateGemstone(req, res) {
 };
 
 // Delete gemstone
-export async function deleteGemstone(req, res) {
+module.exports.deleteGemstone = async function(req, res) {
   try {
     const gemstone = await Gemstone.findByIdAndDelete(req.params.id);
     if (!gemstone) {

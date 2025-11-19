@@ -1,6 +1,6 @@
-import express from 'express';
+const express = require('express');
 const router = express.Router();
-import * as contactMessageController from '../controllers/contactMessageController.js';
+const contactMessageController = require('../controllers/contactMessageController.js');
 
 // GET /api/contact-messages - Get all contact messages
 router.get('/', contactMessageController.getAllContactMessages);
@@ -17,4 +17,4 @@ router.put('/:id', contactMessageController.updateContactMessage);
 // DELETE /api/contact-messages/:id - Delete contact message
 router.delete('/:id', contactMessageController.deleteContactMessage);
 
-export default router;
+module.exports = router;

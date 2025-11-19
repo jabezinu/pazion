@@ -1,7 +1,7 @@
-import 'dotenv/config';
-import mongoose from 'mongoose';
-import Gemstone from './models/Gemstone.js';
-import Course from './models/Course.js';
+require('dotenv/config');
+const mongoose = require('mongoose');
+const Gemstone = require('./models/Gemstone.js');
+const Course = require('./models/Course.js');
 
 const gemstonesData = [
   {

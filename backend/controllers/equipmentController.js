@@ -1,6 +1,6 @@
-import Equipment from '../models/Equipment.js';
-import { v2 as cloudinary } from 'cloudinary';
-import multer from 'multer';
+const Equipment = require('../models/Equipment.js');
+const { v2: cloudinary } = require('cloudinary');
+const multer = require('multer');
 
 // Configure multer for memory storage
 const storage = multer.memoryStorage();
@@ -21,10 +21,10 @@ const uploadToCloudinary = (buffer) => {
 };
 
 // Export multer upload middleware
-export { upload };
+module.exports.upload = upload;
 
 // Get all equipments
-export async function getAllEquipments(req, res) {
+module.exports.getAllEquipments = async function(req, res) {
   try {
     const equipments = await Equipment.find();
     res.json(equipments);
@@ -34,7 +34,7 @@ export async function getAllEquipments(req, res) {
 };
 
 // Get single equipment
-export async function getEquipmentById(req, res) {
+module.exports.getEquipmentById = async function(req, res) {
   try {
     const equipment = await Equipment.findById(req.params.id);
     if (!equipment) {
@@ -47,7 +47,7 @@ export async function getEquipmentById(req, res) {
 };
 
 // Create equipment
-export async function createEquipment(req, res) {
+module.exports.createEquipment = async function(req, res) {
   try {
     let imageUrl = '';
     if (req.file) {
@@ -68,7 +68,7 @@ export async function createEquipment(req, res) {
 };
 
 // Update equipment
-export async function updateEquipment(req, res) {
+module.exports.updateEquipment = async function(req, res) {
   try {
     let updateData = { ...req.body };
 
@@ -92,7 +92,7 @@ export async function updateEquipment(req, res) {
 };
 
 // Delete equipment
-export async function deleteEquipment(req, res) {
+module.exports.deleteEquipment = async function(req, res) {
   try {
     const equipment = await Equipment.findByIdAndDelete(req.params.id);
     if (!equipment) {

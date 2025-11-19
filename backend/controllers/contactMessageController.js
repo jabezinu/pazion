@@ -1,7 +1,7 @@
-import ContactMessage from '../models/ContactMessage.js';
+const ContactMessage = require('../models/ContactMessage.js');
 
 // Get all contact messages
-export async function getAllContactMessages(req, res) {
+module.exports.getAllContactMessages = async function(req, res) {
   try {
     const messages = await ContactMessage.find().sort({ createdAt: -1 });
     res.json(messages);
@@ -11,7 +11,7 @@ export async function getAllContactMessages(req, res) {
 };
 
 // Get single contact message
-export async function getContactMessageById(req, res) {
+module.exports.getContactMessageById = async function(req, res) {
   try {
     const message = await ContactMessage.findById(req.params.id);
     if (!message) {
@@ -24,7 +24,7 @@ export async function getContactMessageById(req, res) {
 };
 
 // Create contact message
-export async function createContactMessage(req, res) {
+module.exports.createContactMessage = async function(req, res) {
   try {
     const message = new ContactMessage(req.body);
     const newMessage = await message.save();
@@ -35,7 +35,7 @@ export async function createContactMessage(req, res) {
 };
 
 // Update contact message (mark as read)
-export async function updateContactMessage(req, res) {
+module.exports.updateContactMessage = async function(req, res) {
   try {
     const message = await ContactMessage.findByIdAndUpdate(
       req.params.id,
@@ -52,7 +52,7 @@ export async function updateContactMessage(req, res) {
 };
 
 // Delete contact message
-export async function deleteContactMessage(req, res) {
+module.exports.deleteContactMessage = async function(req, res) {
   try {
     const message = await ContactMessage.findByIdAndDelete(req.params.id);
     if (!message) {

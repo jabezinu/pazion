@@ -1,6 +1,6 @@
-import Course from '../models/Course.js';
-import { v2 as cloudinary } from 'cloudinary';
-import multer from 'multer';
+const Course = require('../models/Course.js');
+const { v2: cloudinary } = require('cloudinary');
+const multer = require('multer');
 
 // Configure multer for memory storage
 const storage = multer.memoryStorage();
@@ -21,10 +21,10 @@ const uploadToCloudinary = (buffer) => {
 };
 
 // Export multer upload middleware
-export { upload };
+module.exports.upload = upload;
 
 // Get all courses
-export async function getAllCourses(req, res) {
+module.exports.getAllCourses = async function(req, res) {
   try {
     const courses = await Course.find();
     res.json(courses);
@@ -34,7 +34,7 @@ export async function getAllCourses(req, res) {
 };
 
 // Get single course
-export async function getCourseById(req, res) {
+module.exports.getCourseById = async function(req, res) {
   try {
     const course = await Course.findById(req.params.id);
     if (!course) {
@@ -47,7 +47,7 @@ export async function getCourseById(req, res) {
 };
 
 // Create course
-export async function createCourse(req, res) {
+module.exports.createCourse = async function(req, res) {
   try {
     let imageUrl = '';
     if (req.file) {
@@ -68,7 +68,7 @@ export async function createCourse(req, res) {
 };
 
 // Update course
-export async function updateCourse(req, res) {
+module.exports.updateCourse = async function(req, res) {
   try {
     let updateData = { ...req.body };
 
@@ -92,7 +92,7 @@ export async function updateCourse(req, res) {
 };
 
 // Delete course
-export async function deleteCourse(req, res) {
+module.exports.deleteCourse = async function(req, res) {
   try {
     const course = await Course.findByIdAndDelete(req.params.id);
     if (!course) {

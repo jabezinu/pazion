@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const equipmentSchema = new mongoose.Schema({
   name: {
@@ -22,4 +22,4 @@ const equipmentSchema = new mongoose.Schema({
   suppressReservedKeysWarning: true
 });
 
-export default mongoose.model('Equipment', equipmentSchema);
+module.exports = mongoose.model('Equipment', equipmentSchema);
