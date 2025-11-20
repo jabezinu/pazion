@@ -8,6 +8,7 @@ import equipmentsRouter from './routes/equipments.js';
 import contactMessagesRouter from './routes/contactMessages.js';
 import commentsRouter from './routes/comments.js';
 import videosRouter from './routes/videos.js';
+import authRouter from './routes/auth.js';
 import { v2 as cloudinary } from 'cloudinary';
 
 // Configure Cloudinary
@@ -30,6 +31,7 @@ mongoose.connect(process.env.MONGODB_URI)
   .catch(err => console.error('MongoDB connection error:', err));
 
 // Routes
+app.use('/api/auth', authRouter);
 app.use('/api/gemstones', gemstonesRouter);
 app.use('/api/courses', coursesRouter);
 app.use('/api/equipments', equipmentsRouter);

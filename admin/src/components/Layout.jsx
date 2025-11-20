@@ -1,13 +1,18 @@
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import { FaGem, FaBook, FaTools, FaEnvelope, FaVideo, FaChevronLeft, FaChevronRight, FaBars, FaPlus } from 'react-icons/fa'
+import { FaGem, FaBook, FaTools, FaEnvelope, FaVideo, FaChevronLeft, FaChevronRight, FaBars, FaKey, FaSignOutAlt } from 'react-icons/fa'
 import { ToastContainer } from 'react-toastify'
+import { useAuth } from '../contexts/AuthContext'
+import ChangePasswordModal from './ChangePasswordModal'
 import 'react-toastify/dist/ReactToastify.css'
 
 export default function Layout({ children }) {
   const location = useLocation()
+  const navigate = useNavigate()
+  const { logout } = useAuth()
   const [isCollapsed, setIsCollapsed] = useState(false)
   const [isMobileOpen, setIsMobileOpen] = useState(false)
+  const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false)
 
   const toggleSidebar = () => {
     if (window.innerWidth < 768) {
@@ -19,6 +24,11 @@ export default function Layout({ children }) {
 
   const closeMobileSidebar = () => {
     setIsMobileOpen(false)
+  }
+
+  const handleLogout = () => {
+    logout()
+    navigate('/login')
   }
 
   const navItems = [
@@ -78,8 +88,44 @@ export default function Layout({ children }) {
               </Link>
             ))}
           </nav>
+
+          {/* Bottom Actions */}
+          <div className="px-4 py-4 border-t border-gray-200 space-y-1">
+            <button
+              onClick={() => {
+                setIsChangePasswordOpen(true)
+                closeMobileSidebar()
+              }}
+              title={isCollapsed ? 'Change Password' : undefined}
+              className={`w-full flex items-center px-4 py-3 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-all duration-200 ${
+                isCollapsed ? 'justify-center' : ''
+              }`}
+            >
+              <FaKey className={`${isCollapsed ? 'text-xl' : 'text-lg mr-3'}`} />
+              {!isCollapsed && <span>Change Password</span>}
+            </button>
+            <button
+              onClick={() => {
+                handleLogout()
+                closeMobileSidebar()
+              }}
+              title={isCollapsed ? 'Logout' : undefined}
+              className={`w-full flex items-center px-4 py-3 rounded-lg text-sm font-medium text-red-600 hover:bg-red-50 transition-all duration-200 ${
+                isCollapsed ? 'justify-center' : ''
+              }`}
+            >
+              <FaSignOutAlt className={`${isCollapsed ? 'text-xl' : 'text-lg mr-3'}`} />
+              {!isCollapsed && <span>Logout</span>}
+            </button>
+          </div>
         </div>
       </aside>
+
+      {/* Change Password Modal */}
+      <ChangePasswordModal
+        isOpen={isChangePasswordOpen}
+        onClose={() => setIsChangePasswordOpen(false)}
+      />
 
       {/* Main content */}
       <div className={`flex-1 transition-all duration-300 ${isCollapsed ? 'md:ml-20 lg:ml-20 xl:ml-20' : 'md:ml-56 lg:ml-64 xl:ml-72'}`}>
