@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { useLanguage } from '../contexts/LanguageContext';
 import contactMessageService from '../services/contactMessageService';
 
@@ -66,11 +67,11 @@ export default function Contact() {
     e.preventDefault();
     try {
       await contactMessageService.create(formData);
-      alert(t.successMessage);
+      toast.success(t.successMessage);
       setFormData({ name: '', email: '', message: '', rating: 5, location: '' });
     } catch (error) {
       console.error('Error submitting contact form:', error);
-      alert('Failed to send message. Please try again.');
+      toast.error('Failed to send message. Please try again.');
     }
   };
 

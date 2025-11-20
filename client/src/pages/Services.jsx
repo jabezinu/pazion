@@ -2,6 +2,7 @@ import { Gem, ShoppingCart, GraduationCap, Wrench, Check, Star, Clock, Award, Tr
 import { useLanguage } from '../contexts/LanguageContext';
 import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import courseService from '../services/courseService';
 import equipmentService from '../services/equipmentService';
 
@@ -29,6 +30,7 @@ export default function Services() {
         setCourses(data);
       } catch (error) {
         console.error('Failed to fetch courses:', error);
+        toast.error('Failed to load courses. Please try again later.');
       } finally {
         setCoursesLoading(false);
       }
@@ -44,6 +46,7 @@ export default function Services() {
         setEquipments(data);
       } catch (error) {
         console.error('Failed to fetch equipments:', error);
+        toast.error('Failed to load equipment. Please try again later.');
       } finally {
         setEquipmentsLoading(false);
       }

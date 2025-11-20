@@ -1,3 +1,5 @@
+import toast from 'react-hot-toast';
+
 export default function Products() {
   const products = [
     { name: "Diamond", price: "$5,000", image: "https://via.placeholder.com/300x200?text=Diamond" },
@@ -18,7 +20,10 @@ export default function Products() {
             <div className="p-6">
               <h3 className="text-xl font-semibold mb-2 text-gray-800">{product.name}</h3>
               <p className="text-2xl font-bold text-blue-600 mb-4">{product.price}</p>
-              <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300">
+              <button
+                onClick={() => toast('Inquiry feature coming soon! Please contact us directly.', { icon: '🚀' })}
+                className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300"
+              >
                 Inquire Now
               </button>
             </div>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Search, Filter, X, Languages } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 export default function GemstonesPage() {
   const { language } = useLanguage();
@@ -143,6 +144,7 @@ export default function GemstonesPage() {
     } catch (err) {
       setError('Failed to fetch gemstones');
       console.error('Error fetching gemstones:', err);
+      toast.error('Failed to load gemstones. Please try again later.');
     } finally {
       setLoading(false);
     }
