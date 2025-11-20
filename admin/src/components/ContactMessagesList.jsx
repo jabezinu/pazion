@@ -2,39 +2,27 @@ import { useState, useEffect } from 'react'
 import { FaTrash, FaEnvelope, FaEnvelopeOpen } from 'react-icons/fa'
 import { toast } from 'react-toastify'
 import { useModal } from '../contexts/ModalContext'
+import { useData } from '../contexts/DataContext'
 import contactMessageService from '../services/contactMessageService'
 
 export default function ContactMessagesList() {
-  const [messages, setMessages] = useState([])
-  const [loading, setLoading] = useState(true)
+  const { contactMessages, contactMessagesLoading, fetchContactMessages, deleteContactMessage, updateContactMessage } = useData()
   const [error, setError] = useState(null)
   const { showConfirm } = useModal()
 
   useEffect(() => {
-    fetchMessages()
-  }, [])
-
-  const fetchMessages = async () => {
-    try {
-      setLoading(true)
-      const data = await contactMessageService.getAll()
-      setMessages(data)
-      setError(null)
-    } catch (err) {
+    fetchContactMessages().catch(err => {
       setError('Failed to fetch contact messages')
       toast.error('Failed to fetch contact messages')
-      console.error('Error fetching contact messages:', err)
-    } finally {
-      setLoading(false)
-    }
-  }
+    })
+  }, [fetchContactMessages])
 
   const handleDelete = async (id) => {
     const confirmed = await showConfirm('Are you sure you want to delete this contact message?', 'Delete Contact Message')
     if (confirmed) {
       try {
         await contactMessageService.delete(id)
-        setMessages(messages.filter(message => message._id !== id))
+        deleteContactMessage(id)
         toast.success('Contact message deleted successfully')
       } catch (err) {
         setError('Failed to delete contact message')
@@ -47,9 +35,7 @@ export default function ContactMessagesList() {
   const handleMarkAsRead = async (id) => {
     try {
       await contactMessageService.update(id, { read: true })
-      setMessages(messages.map(message =>
-        message._id === id ? { ...message, read: true } : message
-      ))
+      updateContactMessage(id, { read: true })
       toast.success('Message marked as read')
     } catch (err) {
       setError('Failed to mark message as read')
@@ -60,18 +46,24 @@ export default function ContactMessagesList() {
 
   const handleToggleDisplayOnHome = async (id) => {
     try {
-      const message = messages.find(m => m._id === id)
+      const message = contactMessages.find(m => m._id === id)
       const newDisplayOnHome = !message.displayOnHome
       await contactMessageService.update(id, { displayOnHome: newDisplayOnHome })
-      setMessages(messages.map(message =>
-        message._id === id ? { ...message, displayOnHome: newDisplayOnHome } : message
-      ))
+      updateContactMessage(id, { displayOnHome: newDisplayOnHome })
       toast.success(newDisplayOnHome ? 'Message will be displayed on home page' : 'Message removed from home page display')
     } catch (err) {
       setError('Failed to update display status')
       toast.error('Failed to update display status')
       console.error('Error updating display status:', err)
     }
+  }
+
+  const handleRetry = () => {
+    setError(null)
+    fetchContactMessages(true).catch(err => {
+      setError('Failed to fetch contact messages')
+      toast.error('Failed to fetch contact messages')
+    })
   }
 
   const formatDate = (dateString) => {
@@ -84,7 +76,7 @@ export default function ContactMessagesList() {
     })
   }
 
-  if (loading) {
+  if (contactMessagesLoading) {
     return (
       <div className="flex justify-center items-center h-64">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
@@ -97,7 +89,7 @@ export default function ContactMessagesList() {
       <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
         {error}
         <button
-          onClick={fetchMessages}
+          onClick={handleRetry}
           className="ml-4 bg-red-100 hover:bg-red-200 text-red-800 px-3 py-1 rounded text-sm"
         >
           Retry
@@ -119,7 +111,7 @@ export default function ContactMessagesList() {
           </div>
           <div className="flex items-center space-x-4">
             <div className="text-sm text-gray-500">
-              {messages.filter(m => !m.read).length} unread
+              {contactMessages.filter(m => !m.read).length} unread
             </div>
           </div>
         </div>
@@ -127,7 +119,7 @@ export default function ContactMessagesList() {
 
       {/* Messages List */}
       <div className="space-y-4">
-        {messages.map((message) => (
+        {contactMessages.map((message) => (
           <div key={message._id} className={`bg-white rounded-xl shadow-sm border hover:shadow-md transition-all duration-300 overflow-hidden ${
             message.read
               ? 'border-gray-200'
@@ -222,7 +214,7 @@ export default function ContactMessagesList() {
       </div>
 
       {/* Empty State */}
-      {messages.length === 0 && (
+      {contactMessages.length === 0 && (
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-16 text-center">
           <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
             <FaEnvelope className="h-10 w-10 text-gray-400" />

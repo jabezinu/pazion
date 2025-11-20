@@ -3,39 +3,27 @@ import { Link } from 'react-router-dom'
 import { FaEdit, FaTrash, FaPlus } from 'react-icons/fa'
 import { toast } from 'react-toastify'
 import { useModal } from '../contexts/ModalContext'
+import { useData } from '../contexts/DataContext'
 import gemstoneService from '../services/gemstoneService'
 
 export default function GemstonesList() {
-  const [gemstones, setGemstones] = useState([])
-  const [loading, setLoading] = useState(true)
+  const { gemstones, gemstonesLoading, fetchGemstones, deleteGemstone } = useData()
   const [error, setError] = useState(null)
   const { showConfirm } = useModal()
 
   useEffect(() => {
-    fetchGemstones()
-  }, [])
-
-  const fetchGemstones = async () => {
-    try {
-      setLoading(true)
-      const data = await gemstoneService.getAll()
-      setGemstones(data)
-      setError(null)
-    } catch (err) {
+    fetchGemstones().catch(err => {
       setError('Failed to fetch gemstones')
       toast.error('Failed to fetch gemstones')
-      console.error('Error fetching gemstones:', err)
-    } finally {
-      setLoading(false)
-    }
-  }
+    })
+  }, [fetchGemstones])
 
   const handleDelete = async (id) => {
     const confirmed = await showConfirm('Are you sure you want to delete this gemstone?', 'Delete Gemstone')
     if (confirmed) {
       try {
         await gemstoneService.delete(id)
-        setGemstones(gemstones.filter(gemstone => gemstone._id !== id))
+        deleteGemstone(id)
         toast.success('Gemstone deleted successfully')
       } catch (err) {
         setError('Failed to delete gemstone')
@@ -45,7 +33,15 @@ export default function GemstonesList() {
     }
   }
 
-  if (loading) {
+  const handleRetry = () => {
+    setError(null)
+    fetchGemstones(true).catch(err => {
+      setError('Failed to fetch gemstones')
+      toast.error('Failed to fetch gemstones')
+    })
+  }
+
+  if (gemstonesLoading) {
     return (
       <div className="flex justify-center items-center h-64">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
@@ -58,7 +54,7 @@ export default function GemstonesList() {
       <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
         {error}
         <button
-          onClick={fetchGemstones}
+          onClick={handleRetry}
           className="ml-4 bg-red-100 hover:bg-red-200 text-red-800 px-3 py-1 rounded text-sm"
         >
           Retry

@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider } from './contexts/AuthContext'
 import { ModalProvider } from './contexts/ModalContext'
+import { DataProvider } from './contexts/DataContext'
 import ProtectedRoute from './components/ProtectedRoute'
 import Login from './components/Login'
 import Layout from './components/Layout'
@@ -17,8 +18,9 @@ import VideoForm from './components/VideoForm'
 export default function App() {
   return (
     <AuthProvider>
-      <ModalProvider>
-        <Routes>
+      <DataProvider>
+        <ModalProvider>
+          <Routes>
           <Route path="/login" element={<Login />} />
           <Route
             path="/*"
@@ -44,8 +46,9 @@ export default function App() {
               </ProtectedRoute>
             }
           />
-        </Routes>
-      </ModalProvider>
+          </Routes>
+        </ModalProvider>
+      </DataProvider>
     </AuthProvider>
   )
 }

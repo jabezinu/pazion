@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom'
 import { FaEdit, FaTrash, FaPlus, FaPlay } from 'react-icons/fa'
 import { toast } from 'react-toastify'
 import { useModal } from '../contexts/ModalContext'
+import { useData } from '../contexts/DataContext'
 import videoService from '../services/videoService'
 
 export default function VideosList() {
-  const [videos, setVideos] = useState([])
-  const [loading, setLoading] = useState(true)
+  const { videos, videosLoading, fetchVideos, deleteVideo } = useData()
   const [error, setError] = useState(null)
   const { showConfirm } = useModal()
 
@@ -46,30 +46,18 @@ export default function VideosList() {
   };
 
   useEffect(() => {
-    fetchVideos()
-  }, [])
-
-  const fetchVideos = async () => {
-    try {
-      setLoading(true)
-      const data = await videoService.getAll()
-      setVideos(data)
-      setError(null)
-    } catch (err) {
+    fetchVideos().catch(err => {
       setError('Failed to fetch videos')
       toast.error('Failed to fetch videos')
-      console.error('Error fetching videos:', err)
-    } finally {
-      setLoading(false)
-    }
-  }
+    })
+  }, [fetchVideos])
 
   const handleDelete = async (id) => {
     const confirmed = await showConfirm('Are you sure you want to delete this video?', 'Delete Video')
     if (confirmed) {
       try {
         await videoService.delete(id)
-        setVideos(videos.filter(video => video._id !== id))
+        deleteVideo(id)
         toast.success('Video deleted successfully')
       } catch (err) {
         setError('Failed to delete video')
@@ -79,7 +67,15 @@ export default function VideosList() {
     }
   }
 
-  if (loading) {
+  const handleRetry = () => {
+    setError(null)
+    fetchVideos(true).catch(err => {
+      setError('Failed to fetch videos')
+      toast.error('Failed to fetch videos')
+    })
+  }
+
+  if (videosLoading) {
     return (
       <div className="flex justify-center items-center h-64">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
@@ -92,7 +88,7 @@ export default function VideosList() {
       <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
         {error}
         <button
-          onClick={fetchVideos}
+          onClick={handleRetry}
           className="ml-4 bg-red-100 hover:bg-red-200 text-red-800 px-3 py-1 rounded text-sm"
         >
           Retry

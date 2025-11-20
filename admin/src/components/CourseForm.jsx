@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { FaSave, FaArrowLeft, FaBook, FaClock, FaDollarSign, FaLayerGroup, FaFileAlt, FaImage } from 'react-icons/fa'
 import { toast } from 'react-toastify'
+import { useData } from '../contexts/DataContext'
 import courseService from '../services/courseService'
 
 const LEVELS = ['Beginner', 'Intermediate', 'Advanced', 'All Levels']
@@ -10,6 +11,7 @@ export default function CourseForm() {
   const navigate = useNavigate()
   const { id } = useParams()
   const isEditing = !!id
+  const { addCourse, updateCourse } = useData()
 
   const [formData, setFormData] = useState({
     name: '',
@@ -82,10 +84,12 @@ export default function CourseForm() {
 
     try {
       if (isEditing) {
-        await courseService.update(id, formData)
+        const updatedCourse = await courseService.update(id, formData)
+        updateCourse(id, updatedCourse)
         toast.success('Course updated successfully')
       } else {
-        await courseService.create(formData)
+        const newCourse = await courseService.create(formData)
+        addCourse(newCourse)
         toast.success('Course created successfully')
       }
       navigate('/courses')

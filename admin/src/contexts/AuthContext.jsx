@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import { authService } from '../services/authService'
+import { clearDataCache } from './DataContext'
 
 const AuthContext = createContext(null)
 
@@ -42,6 +43,8 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     localStorage.removeItem('adminToken')
     setAdmin(null)
+    // Clear cached data on logout
+    clearDataCache()
   }
 
   const changePassword = async (currentPassword, newPassword) => {

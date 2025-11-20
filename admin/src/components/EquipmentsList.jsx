@@ -3,39 +3,27 @@ import { Link } from 'react-router-dom'
 import { FaEdit, FaTrash, FaPlus } from 'react-icons/fa'
 import { toast } from 'react-toastify'
 import { useModal } from '../contexts/ModalContext'
+import { useData } from '../contexts/DataContext'
 import equipmentService from '../services/equipmentService'
 
 export default function EquipmentsList() {
-  const [equipments, setEquipments] = useState([])
-  const [loading, setLoading] = useState(true)
+  const { equipments, equipmentsLoading, fetchEquipments, deleteEquipment } = useData()
   const [error, setError] = useState(null)
   const { showConfirm } = useModal()
 
   useEffect(() => {
-    fetchEquipments()
-  }, [])
-
-  const fetchEquipments = async () => {
-    try {
-      setLoading(true)
-      const data = await equipmentService.getAll()
-      setEquipments(data)
-      setError(null)
-    } catch (err) {
+    fetchEquipments().catch(err => {
       setError('Failed to fetch equipments')
       toast.error('Failed to fetch equipments')
-      console.error('Error fetching equipments:', err)
-    } finally {
-      setLoading(false)
-    }
-  }
+    })
+  }, [fetchEquipments])
 
   const handleDelete = async (id) => {
     const confirmed = await showConfirm('Are you sure you want to delete this equipment?', 'Delete Equipment')
     if (confirmed) {
       try {
         await equipmentService.delete(id)
-        setEquipments(equipments.filter(equipment => equipment._id !== id))
+        deleteEquipment(id)
         toast.success('Equipment deleted successfully')
       } catch (err) {
         setError('Failed to delete equipment')
@@ -45,7 +33,15 @@ export default function EquipmentsList() {
     }
   }
 
-  if (loading) {
+  const handleRetry = () => {
+    setError(null)
+    fetchEquipments(true).catch(err => {
+      setError('Failed to fetch equipments')
+      toast.error('Failed to fetch equipments')
+    })
+  }
+
+  if (equipmentsLoading) {
     return (
       <div className="flex justify-center items-center h-64">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
@@ -58,7 +54,7 @@ export default function EquipmentsList() {
       <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
         {error}
         <button
-          onClick={fetchEquipments}
+          onClick={handleRetry}
           className="ml-4 bg-red-100 hover:bg-red-200 text-red-800 px-3 py-1 rounded text-sm"
         >
           Retry

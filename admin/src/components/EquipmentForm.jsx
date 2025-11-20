@@ -2,12 +2,14 @@ import { useState, useEffect, useCallback } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { FaSave, FaArrowLeft, FaCogs, FaDollarSign, FaFileAlt, FaImage } from 'react-icons/fa'
 import { toast } from 'react-toastify'
+import { useData } from '../contexts/DataContext'
 import equipmentService from '../services/equipmentService'
 
 export default function EquipmentForm() {
   const navigate = useNavigate()
   const { id } = useParams()
   const isEditing = !!id
+  const { addEquipment, updateEquipment } = useData()
 
   const [formData, setFormData] = useState({
     name: '',
@@ -76,10 +78,12 @@ export default function EquipmentForm() {
 
     try {
       if (isEditing) {
-        await equipmentService.update(id, formData)
+        const updatedEquipment = await equipmentService.update(id, formData)
+        updateEquipment(id, updatedEquipment)
         toast.success('Equipment updated successfully')
       } else {
-        await equipmentService.create(formData)
+        const newEquipment = await equipmentService.create(formData)
+        addEquipment(newEquipment)
         toast.success('Equipment created successfully')
       }
       navigate('/equipments')

@@ -2,12 +2,14 @@ import { useState, useEffect, useCallback } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { FaSave, FaArrowLeft, FaVideo, FaHeading, FaLink, FaFileAlt } from 'react-icons/fa'
 import { toast } from 'react-toastify'
+import { useData } from '../contexts/DataContext'
 import videoService from '../services/videoService'
 
 export default function VideoForm() {
   const navigate = useNavigate()
   const { id } = useParams()
   const isEditing = !!id
+  const { addVideo, updateVideo } = useData()
 
   const [formData, setFormData] = useState({
     title: '',
@@ -101,10 +103,12 @@ export default function VideoForm() {
 
     try {
       if (isEditing) {
-        await videoService.update(id, formData)
+        const updatedVideo = await videoService.update(id, formData)
+        updateVideo(id, updatedVideo)
         toast.success('Video updated successfully')
       } else {
-        await videoService.create(formData)
+        const newVideo = await videoService.create(formData)
+        addVideo(newVideo)
         toast.success('Video created successfully')
       }
       navigate('/videos')

@@ -3,39 +3,27 @@ import { Link } from 'react-router-dom'
 import { FaEdit, FaTrash, FaPlus } from 'react-icons/fa'
 import { toast } from 'react-toastify'
 import { useModal } from '../contexts/ModalContext'
+import { useData } from '../contexts/DataContext'
 import courseService from '../services/courseService'
 
 export default function CoursesList() {
-  const [courses, setCourses] = useState([])
-  const [loading, setLoading] = useState(true)
+  const { courses, coursesLoading, fetchCourses, deleteCourse } = useData()
   const [error, setError] = useState(null)
   const { showConfirm } = useModal()
 
   useEffect(() => {
-    fetchCourses()
-  }, [])
-
-  const fetchCourses = async () => {
-    try {
-      setLoading(true)
-      const data = await courseService.getAll()
-      setCourses(data)
-      setError(null)
-    } catch (err) {
+    fetchCourses().catch(err => {
       setError('Failed to fetch courses')
       toast.error('Failed to fetch courses')
-      console.error('Error fetching courses:', err)
-    } finally {
-      setLoading(false)
-    }
-  }
+    })
+  }, [fetchCourses])
 
   const handleDelete = async (id) => {
     const confirmed = await showConfirm('Are you sure you want to delete this course?', 'Delete Course')
     if (confirmed) {
       try {
         await courseService.delete(id)
-        setCourses(courses.filter(course => course._id !== id))
+        deleteCourse(id)
         toast.success('Course deleted successfully')
       } catch (err) {
         setError('Failed to delete course')
@@ -45,7 +33,15 @@ export default function CoursesList() {
     }
   }
 
-  if (loading) {
+  const handleRetry = () => {
+    setError(null)
+    fetchCourses(true).catch(err => {
+      setError('Failed to fetch courses')
+      toast.error('Failed to fetch courses')
+    })
+  }
+
+  if (coursesLoading) {
     return (
       <div className="flex justify-center items-center h-64">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
@@ -58,7 +54,7 @@ export default function CoursesList() {
       <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
         {error}
         <button
-          onClick={fetchCourses}
+          onClick={handleRetry}
           className="ml-4 bg-red-100 hover:bg-red-200 text-red-800 px-3 py-1 rounded text-sm"
         >
           Retry
