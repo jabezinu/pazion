@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronRight, Star, Award, Globe, Users, ShoppingBag, TestTube, Wrench, GraduationCap, MessageCircle } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
-import { commentService } from '../services/commentService';
-import { videoService } from '../services/videoService';
+import { useData } from '../contexts/DataContext';
 import diamondImg from '../assets/kal_asset/gemstones/Diamond.jpg';
 import rubyImg from '../assets/kal_asset/gemstones/ruby.jpg';
 import sapphireImg from '../assets/kal_asset/gemstones/Sapphire.jpg';
@@ -12,11 +11,8 @@ import emeraldImg from '../assets/kal_asset/gemstones/Emerald.jpg';
 export default function GemstonHomepage() {
    const [currentHeroImage, setCurrentHeroImage] = useState(0);
    const [currentTestimonial, setCurrentTestimonial] = useState(0);
-   const [testimonials, setTestimonials] = useState([]);
-   const [testimonialsLoading, setTestimonialsLoading] = useState(true);
-   const [videos, setVideos] = useState([]);
-   const [videosLoading, setVideosLoading] = useState(true);
    const { language } = useLanguage();
+   const { comments, videos, loading } = useData();
  
    // Function to convert video URLs to embed format
    const getEmbedUrl = (url) => {
@@ -207,41 +203,19 @@ export default function GemstonHomepage() {
     'https://images.unsplash.com/photo-1599707367072-cd6ada2bc375?w=1920&q=80'
   ];
 
+  // Map comments to testimonials format
+  const testimonials = useMemo(() => {
+    return comments.map(comment => ({
+      _id: comment._id,
+      text: comment.message,
+      author: comment.name,
+      location: comment.location || 'Unknown Location',
+      rating: comment.rating || 5
+    }));
+  }, [comments]);
 
-  useEffect(() => {
-    const fetchTestimonials = async () => {
-      try {
-        const data = await commentService.getAll();
-        // Map ContactMessage fields to testimonial format
-        const mappedTestimonials = data.map(comment => ({
-          _id: comment._id,
-          text: comment.message,
-          author: comment.name,
-          location: comment.location || 'Unknown Location',
-          rating: comment.rating || 5
-        }));
-        setTestimonials(mappedTestimonials);
-      } catch (error) {
-        console.error('Error fetching testimonials:', error);
-      } finally {
-        setTestimonialsLoading(false);
-      }
-    };
-
-    const fetchVideos = async () => {
-      try {
-        const data = await videoService.getAll();
-        setVideos(data);
-      } catch (error) {
-        console.error('Error fetching videos:', error);
-      } finally {
-        setVideosLoading(false);
-      }
-    };
-
-    fetchTestimonials();
-    fetchVideos();
-  }, []);
+  const testimonialsLoading = loading.comments;
+  const videosLoading = loading.videos;
 
   useEffect(() => {
     const heroTimer = setInterval(() => {

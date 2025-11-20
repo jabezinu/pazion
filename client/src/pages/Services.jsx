@@ -1,18 +1,17 @@
 import { Gem, ShoppingCart, GraduationCap, Wrench, Check, Star, Clock, Award, TrendingUp, Mail, Phone, MapPin } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useData } from '../contexts/DataContext';
 import { Link, useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import toast from 'react-hot-toast';
-import courseService from '../services/courseService';
-import equipmentService from '../services/equipmentService';
 
 export default function Services() {
   const { language } = useLanguage();
   const location = useLocation();
-  const [courses, setCourses] = useState([]);
-  const [coursesLoading, setCoursesLoading] = useState(true);
-  const [equipments, setEquipments] = useState([]);
-  const [equipmentsLoading, setEquipmentsLoading] = useState(true);
+  const { courses, equipments, loading, errors } = useData();
+  
+  const coursesLoading = loading.courses;
+  const equipmentsLoading = loading.equipments;
 
   useEffect(() => {
     if (location.hash) {
@@ -24,36 +23,13 @@ export default function Services() {
   }, [location]);
 
   useEffect(() => {
-    const fetchCourses = async () => {
-      try {
-        const data = await courseService.getAll();
-        setCourses(data);
-      } catch (error) {
-        console.error('Failed to fetch courses:', error);
-        toast.error('Failed to load courses. Please try again later.');
-      } finally {
-        setCoursesLoading(false);
-      }
-    };
-
-    fetchCourses();
-  }, []);
-
-  useEffect(() => {
-    const fetchEquipments = async () => {
-      try {
-        const data = await equipmentService.getAll();
-        setEquipments(data);
-      } catch (error) {
-        console.error('Failed to fetch equipments:', error);
-        toast.error('Failed to load equipment. Please try again later.');
-      } finally {
-        setEquipmentsLoading(false);
-      }
-    };
-
-    fetchEquipments();
-  }, []);
+    if (errors.courses) {
+      toast.error('Failed to load courses. Please try again later.');
+    }
+    if (errors.equipments) {
+      toast.error('Failed to load equipment. Please try again later.');
+    }
+  }, [errors.courses, errors.equipments]);
 
   const translations = {
     en: {

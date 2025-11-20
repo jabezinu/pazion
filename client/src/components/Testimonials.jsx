@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useData } from '../contexts/DataContext';
 import commentService from '../services/commentService';
 
 export default function Testimonials() {
-  const [comments, setComments] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { comments, loading: dataLoading, errors, refreshComments } = useData();
+  const loading = dataLoading.comments;
+  const error = errors.comments;
+  
   const [formData, setFormData] = useState({
     author: '',
     text: '',
@@ -13,24 +15,6 @@ export default function Testimonials() {
   });
   const [submitting, setSubmitting] = useState(false);
   const [showForm, setShowForm] = useState(false);
-
-  useEffect(() => {
-    fetchComments();
-  }, []);
-
-  const fetchComments = async () => {
-    try {
-      setLoading(true);
-      const data = await commentService.getAll();
-      setComments(data);
-      setError(null);
-    } catch (err) {
-      setError('Failed to load testimonials');
-      console.error('Error fetching comments:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleChange = (e) => {
     const { name, value, type } = e.target;
@@ -52,10 +36,10 @@ export default function Testimonials() {
         rating: 5
       });
       setShowForm(false);
-      fetchComments(); // Refresh comments
+      await refreshComments(); // Refresh comments from cache
     } catch (err) {
-      setError('Failed to submit testimonial');
       console.error('Error submitting comment:', err);
+      alert('Failed to submit testimonial. Please try again.');
     } finally {
       setSubmitting(false);
     }
@@ -176,10 +160,10 @@ export default function Testimonials() {
         ) : error ? (
           <div className="text-center">
             <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded max-w-md mx-auto">
-              {error}
+              Failed to load testimonials
             </div>
             <button
-              onClick={fetchComments}
+              onClick={refreshComments}
               className="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             >
               Try Again

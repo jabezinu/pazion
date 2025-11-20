@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { ModalProvider } from './contexts/ModalContext';
+import { DataProvider } from './contexts/DataContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -15,7 +16,8 @@ export default function App() {
   return (
     <LanguageProvider>
       <ModalProvider>
-        <Router>
+        <DataProvider>
+          <Router>
           <div className="min-h-screen bg-gray-50">
             <Header />
             <main>
@@ -54,7 +56,8 @@ export default function App() {
               },
             }}
           />
-        </Router>
+          </Router>
+        </DataProvider>
       </ModalProvider>
     </LanguageProvider>
   );

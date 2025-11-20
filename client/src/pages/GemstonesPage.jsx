@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Search, Filter, X, Languages } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
-import axios from 'axios';
+import { useData } from '../contexts/DataContext';
 import toast from 'react-hot-toast';
 
 export default function GemstonesPage() {
   const { language } = useLanguage();
+  const { gemstones, loading: dataLoading, errors, refreshGemstones } = useData();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedQuality, setSelectedQuality] = useState('all');
   const [showFilters, setShowFilters] = useState(false);
-  const [gemstones, setGemstones] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  
+  const loading = dataLoading.gemstones;
+  const error = errors.gemstones;
 
   const translations = {
     am: {
@@ -127,28 +128,12 @@ export default function GemstonesPage() {
 
   const t = translations[language];
 
-  // API base URL
-  const API_BASE_URL = 'http://localhost:5001/api';
-
-  // Fetch gemstones from API
+  // Show error toast if there's an error
   useEffect(() => {
-    fetchGemstones();
-  }, []);
-
-  const fetchGemstones = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.get(`${API_BASE_URL}/gemstones`);
-      setGemstones(response.data);
-      setError(null);
-    } catch (err) {
-      setError('Failed to fetch gemstones');
-      console.error('Error fetching gemstones:', err);
+    if (error) {
       toast.error('Failed to load gemstones. Please try again later.');
-    } finally {
-      setLoading(false);
     }
-  };
+  }, [error]);
 
   // Map gemstone data with translations
   const translatedGemstones = gemstones.map(gem => ({
@@ -237,9 +222,9 @@ export default function GemstonesPage() {
                 <div className="text-red-400 mb-4">
                   <X className="w-16 h-16 mx-auto" />
                 </div>
-                <p className="text-red-600 mb-4">{error}</p>
+                <p className="text-red-600 mb-4">Failed to load gemstones</p>
                 <button
-                  onClick={fetchGemstones}
+                  onClick={refreshGemstones}
                   className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-semibold transition"
                 >
                   Try Again
