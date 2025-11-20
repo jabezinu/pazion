@@ -1,6 +1,8 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useState } from 'react'
 import { FaGem, FaBook, FaTools, FaEnvelope, FaChevronLeft, FaChevronRight, FaBars, FaPlus } from 'react-icons/fa'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 export default function Layout({ children }) {
   const location = useLocation()
@@ -95,6 +97,18 @@ export default function Layout({ children }) {
           {children}
         </main>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   )
 }

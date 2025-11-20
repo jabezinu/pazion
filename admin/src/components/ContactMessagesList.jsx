@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { FaTrash, FaEnvelope, FaEnvelopeOpen } from 'react-icons/fa'
+import { toast } from 'react-toastify'
 import contactMessageService from '../services/contactMessageService'
 
 export default function ContactMessagesList() {
@@ -19,6 +20,7 @@ export default function ContactMessagesList() {
       setError(null)
     } catch (err) {
       setError('Failed to fetch contact messages')
+      toast.error('Failed to fetch contact messages')
       console.error('Error fetching contact messages:', err)
     } finally {
       setLoading(false)
@@ -30,8 +32,10 @@ export default function ContactMessagesList() {
       try {
         await contactMessageService.delete(id)
         setMessages(messages.filter(message => message._id !== id))
+        toast.success('Contact message deleted successfully')
       } catch (err) {
         setError('Failed to delete contact message')
+        toast.error('Failed to delete contact message')
         console.error('Error deleting contact message:', err)
       }
     }
@@ -43,8 +47,10 @@ export default function ContactMessagesList() {
       setMessages(messages.map(message =>
         message._id === id ? { ...message, read: true } : message
       ))
+      toast.success('Message marked as read')
     } catch (err) {
       setError('Failed to mark message as read')
+      toast.error('Failed to mark message as read')
       console.error('Error marking message as read:', err)
     }
   }
@@ -57,8 +63,10 @@ export default function ContactMessagesList() {
       setMessages(messages.map(message =>
         message._id === id ? { ...message, displayOnHome: newDisplayOnHome } : message
       ))
+      toast.success(newDisplayOnHome ? 'Message will be displayed on home page' : 'Message removed from home page display')
     } catch (err) {
       setError('Failed to update display status')
+      toast.error('Failed to update display status')
       console.error('Error updating display status:', err)
     }
   }

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { FaEdit, FaTrash, FaPlus } from 'react-icons/fa'
+import { toast } from 'react-toastify'
 import equipmentService from '../services/equipmentService'
 
 export default function EquipmentsList() {
@@ -20,6 +21,7 @@ export default function EquipmentsList() {
       setError(null)
     } catch (err) {
       setError('Failed to fetch equipments')
+      toast.error('Failed to fetch equipments')
       console.error('Error fetching equipments:', err)
     } finally {
       setLoading(false)
@@ -31,8 +33,10 @@ export default function EquipmentsList() {
       try {
         await equipmentService.delete(id)
         setEquipments(equipments.filter(equipment => equipment._id !== id))
+        toast.success('Equipment deleted successfully')
       } catch (err) {
         setError('Failed to delete equipment')
+        toast.error('Failed to delete equipment')
         console.error('Error deleting equipment:', err)
       }
     }

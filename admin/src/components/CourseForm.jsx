@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { FaSave, FaArrowLeft, FaBook, FaClock, FaDollarSign, FaLayerGroup, FaFileAlt, FaImage } from 'react-icons/fa'
+import { toast } from 'react-toastify'
 import courseService from '../services/courseService'
 
 const LEVELS = ['Beginner', 'Intermediate', 'Advanced', 'All Levels']
@@ -39,6 +40,7 @@ export default function CourseForm() {
       setCurrentImageUrl(course.image || '')
     } catch (err) {
       setError('Failed to fetch course')
+      toast.error('Failed to fetch course')
       console.error('Error fetching course:', err)
     } finally {
       setFetchLoading(false)
@@ -81,12 +83,15 @@ export default function CourseForm() {
     try {
       if (isEditing) {
         await courseService.update(id, formData)
+        toast.success('Course updated successfully')
       } else {
         await courseService.create(formData)
+        toast.success('Course created successfully')
       }
       navigate('/courses')
     } catch (err) {
       setError(`Failed to ${isEditing ? 'update' : 'create'} course`)
+      toast.error(`Failed to ${isEditing ? 'update' : 'create'} course`)
       console.error('Error saving course:', err)
     } finally {
       setLoading(false)

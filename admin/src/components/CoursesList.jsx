@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { FaEdit, FaTrash, FaPlus } from 'react-icons/fa'
+import { toast } from 'react-toastify'
 import courseService from '../services/courseService'
 
 export default function CoursesList() {
@@ -20,6 +21,7 @@ export default function CoursesList() {
       setError(null)
     } catch (err) {
       setError('Failed to fetch courses')
+      toast.error('Failed to fetch courses')
       console.error('Error fetching courses:', err)
     } finally {
       setLoading(false)
@@ -31,8 +33,10 @@ export default function CoursesList() {
       try {
         await courseService.delete(id)
         setCourses(courses.filter(course => course._id !== id))
+        toast.success('Course deleted successfully')
       } catch (err) {
         setError('Failed to delete course')
+        toast.error('Failed to delete course')
         console.error('Error deleting course:', err)
       }
     }

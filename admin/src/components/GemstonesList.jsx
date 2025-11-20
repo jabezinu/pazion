@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { FaEdit, FaTrash, FaPlus } from 'react-icons/fa'
+import { toast } from 'react-toastify'
 import gemstoneService from '../services/gemstoneService'
 
 export default function GemstonesList() {
@@ -20,6 +21,7 @@ export default function GemstonesList() {
       setError(null)
     } catch (err) {
       setError('Failed to fetch gemstones')
+      toast.error('Failed to fetch gemstones')
       console.error('Error fetching gemstones:', err)
     } finally {
       setLoading(false)
@@ -31,8 +33,10 @@ export default function GemstonesList() {
       try {
         await gemstoneService.delete(id)
         setGemstones(gemstones.filter(gemstone => gemstone._id !== id))
+        toast.success('Gemstone deleted successfully')
       } catch (err) {
         setError('Failed to delete gemstone')
+        toast.error('Failed to delete gemstone')
         console.error('Error deleting gemstone:', err)
       }
     }

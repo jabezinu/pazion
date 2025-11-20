@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { FaSave, FaArrowLeft, FaGem, FaTag, FaStar, FaHammer, FaImage } from 'react-icons/fa'
+import { toast } from 'react-toastify'
 import gemstoneService from '../services/gemstoneService'
 
 const CATEGORIES = ['precious', 'semi-precious', 'organic']
@@ -38,6 +39,7 @@ export default function GemstoneForm() {
       setCurrentImageUrl(gemstone.image || '')
     } catch (err) {
       setError('Failed to fetch gemstone')
+      toast.error('Failed to fetch gemstone')
       console.error('Error fetching gemstone:', err)
     } finally {
       setFetchLoading(false)
@@ -81,12 +83,15 @@ export default function GemstoneForm() {
     try {
       if (isEditing) {
         await gemstoneService.update(id, formData)
+        toast.success('Gemstone updated successfully')
       } else {
         await gemstoneService.create(formData)
+        toast.success('Gemstone created successfully')
       }
       navigate('/')
     } catch (err) {
       setError(`Failed to ${isEditing ? 'update' : 'create'} gemstone`)
+      toast.error(`Failed to ${isEditing ? 'update' : 'create'} gemstone`)
       console.error('Error saving gemstone:', err)
     } finally {
       setLoading(false)

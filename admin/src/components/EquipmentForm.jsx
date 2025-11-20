@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { FaSave, FaArrowLeft, FaCogs, FaDollarSign, FaFileAlt, FaImage } from 'react-icons/fa'
+import { toast } from 'react-toastify'
 import equipmentService from '../services/equipmentService'
 
 export default function EquipmentForm() {
@@ -33,6 +34,7 @@ export default function EquipmentForm() {
       setCurrentImageUrl(equipment.image || '')
     } catch (err) {
       setError('Failed to fetch equipment')
+      toast.error('Failed to fetch equipment')
       console.error('Error fetching equipment:', err)
     } finally {
       setFetchLoading(false)
@@ -75,12 +77,15 @@ export default function EquipmentForm() {
     try {
       if (isEditing) {
         await equipmentService.update(id, formData)
+        toast.success('Equipment updated successfully')
       } else {
         await equipmentService.create(formData)
+        toast.success('Equipment created successfully')
       }
       navigate('/equipments')
     } catch (err) {
       setError(`Failed to ${isEditing ? 'update' : 'create'} equipment`)
+      toast.error(`Failed to ${isEditing ? 'update' : 'create'} equipment`)
       console.error('Error saving equipment:', err)
     } finally {
       setLoading(false)
