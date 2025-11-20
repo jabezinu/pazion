@@ -239,7 +239,7 @@ export default function GemstonHomepage() {
     <div className="min-h-screen bg-white">
 
       {/* Hero Section */}
-      <section className="relative h-screen overflow-hidden">
+      <section className="relative h-[80vh] md:h-screen overflow-hidden">
         {heroImages.map((img, idx) => (
           <div
             key={idx}
@@ -292,9 +292,9 @@ export default function GemstonHomepage() {
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">{t.ourServices}</h2>
-            <p className="text-xl text-gray-600">{t.servicesSubtitle}</p>
-          </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{t.ourServices}</h2>
+              <p className="text-xl text-gray-600">{t.servicesSubtitle}</p>
+            </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, idx) => (
@@ -315,9 +315,9 @@ export default function GemstonHomepage() {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">{t.featuredGemstones}</h2>
-            <p className="text-xl text-gray-600">{t.featuredSubtitle}</p>
-          </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{t.featuredGemstones}</h2>
+              <p className="text-xl text-gray-600">{t.featuredSubtitle}</p>
+            </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {featuredGems.map((gem, idx) => (
@@ -378,9 +378,9 @@ export default function GemstonHomepage() {
       <section className="py-20 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">{t.testimonialTitle}</h2>
-            <p className="text-xl text-gray-600">{t.testimonialSubtitle}</p>
-          </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{t.testimonialTitle}</h2>
+              <p className="text-xl text-gray-600">{t.testimonialSubtitle}</p>
+            </div>
 
           {testimonialsLoading ? (
             <div className="flex justify-center items-center h-64">
@@ -436,9 +436,9 @@ export default function GemstonHomepage() {
       <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Customer Testimonials</h2>
-            <p className="text-lg text-gray-600">Hear directly from our satisfied customers</p>
-          </div>
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Customer Testimonials</h2>
+              <p className="text-lg text-gray-600">Hear directly from our satisfied customers</p>
+            </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Video 1 */}
@@ -446,11 +446,9 @@ export default function GemstonHomepage() {
               <div className="p-2">
                 <iframe
                   src="https://www.tiktok.com/embed/v2/7572215582343302456?hide_related=1"
-                  width="325"
-                  height="700"
                   frameBorder="0"
                   allowFullScreen
-                  className="rounded-xl w-full"
+                  className="rounded-xl w-full h-64 sm:h-80 md:h-96"
                   title="TikTok Testimonial Video 1"
                 ></iframe>
               </div>
@@ -466,11 +464,9 @@ export default function GemstonHomepage() {
               <div className="p-2">
                 <iframe
                   src="https://www.tiktok.com/embed/v2/7572958733005786380?hide_related=1"
-                  width="325"
-                  height="700"
                   frameBorder="0"
                   allowFullScreen
-                  className="rounded-xl w-full"
+                  className="rounded-xl w-full h-64 sm:h-80 md:h-96"
                   title="TikTok Testimonial Video 2"
                 ></iframe>
               </div>
@@ -486,11 +482,9 @@ export default function GemstonHomepage() {
               <div className="p-2">
                 <iframe
                   src="https://www.tiktok.com/embed/v2/7571496642193476875?hide_related=1"
-                  width="325"
-                  height="700"
                   frameBorder="0"
                   allowFullScreen
-                  className="rounded-xl w-full"
+                  className="rounded-xl w-full h-64 sm:h-80 md:h-96"
                   title="TikTok Testimonial Video 3"
                 ></iframe>
               </div>
