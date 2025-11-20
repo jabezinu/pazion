@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react'
 import { FaTrash, FaEnvelope, FaEnvelopeOpen } from 'react-icons/fa'
 import { toast } from 'react-toastify'
+import { useModal } from '../contexts/ModalContext'
 import contactMessageService from '../services/contactMessageService'
 
 export default function ContactMessagesList() {
   const [messages, setMessages] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const { showConfirm } = useModal()
 
   useEffect(() => {
     fetchMessages()
@@ -28,7 +30,8 @@ export default function ContactMessagesList() {
   }
 
   const handleDelete = async (id) => {
-    if (window.confirm('Are you sure you want to delete this contact message?')) {
+    const confirmed = await showConfirm('Are you sure you want to delete this contact message?', 'Delete Contact Message')
+    if (confirmed) {
       try {
         await contactMessageService.delete(id)
         setMessages(messages.filter(message => message._id !== id))
