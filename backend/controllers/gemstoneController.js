@@ -1,10 +1,10 @@
-const Gemstone = require('../models/Gemstone.js');
-const { v2: cloudinary } = require('cloudinary');
-const multer = require('multer');
+import Gemstone from '../models/Gemstone.js';
+import { v2 as cloudinary } from 'cloudinary';
+import multer from 'multer';
 
 // Configure multer for memory storage
 const storage = multer.memoryStorage();
-const upload = multer({ storage });
+export const upload = multer({ storage });
 
 // Helper function to upload image to Cloudinary
 const uploadToCloudinary = (buffer) => {
@@ -20,11 +20,8 @@ const uploadToCloudinary = (buffer) => {
   });
 };
 
-// Export multer upload middleware
-module.exports.upload = upload;
-
 // Get all gemstones
-module.exports.getAllGemstones = async function(req, res) {
+export const getAllGemstones = async function(req, res) {
   try {
     const gemstones = await Gemstone.find();
     res.json(gemstones);
@@ -34,7 +31,7 @@ module.exports.getAllGemstones = async function(req, res) {
 };
 
 // Get single gemstone
-module.exports.getGemstoneById = async function(req, res) {
+export const getGemstoneById = async function(req, res) {
   try {
     const gemstone = await Gemstone.findById(req.params.id);
     if (!gemstone) {
@@ -47,7 +44,7 @@ module.exports.getGemstoneById = async function(req, res) {
 };
 
 // Create gemstone
-module.exports.createGemstone = async function(req, res) {
+export const createGemstone = async function(req, res) {
   try {
     let imageUrl = '';
     if (req.file) {
@@ -68,7 +65,7 @@ module.exports.createGemstone = async function(req, res) {
 };
 
 // Update gemstone
-module.exports.updateGemstone = async function(req, res) {
+export const updateGemstone = async function(req, res) {
   try {
     let updateData = { ...req.body };
 
@@ -92,7 +89,7 @@ module.exports.updateGemstone = async function(req, res) {
 };
 
 // Delete gemstone
-module.exports.deleteGemstone = async function(req, res) {
+export const deleteGemstone = async function(req, res) {
   try {
     const gemstone = await Gemstone.findByIdAndDelete(req.params.id);
     if (!gemstone) {
@@ -103,3 +100,4 @@ module.exports.deleteGemstone = async function(req, res) {
     res.status(500).json({ message: error.message });
   }
 };
+export default { getAllGemstones, getGemstoneById, createGemstone, updateGemstone, deleteGemstone };

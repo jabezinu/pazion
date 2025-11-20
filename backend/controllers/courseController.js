@@ -1,10 +1,10 @@
-const Course = require('../models/Course.js');
-const { v2: cloudinary } = require('cloudinary');
-const multer = require('multer');
+import Course from '../models/Course.js';
+import { v2 as cloudinary } from 'cloudinary';
+import multer from 'multer';
 
 // Configure multer for memory storage
 const storage = multer.memoryStorage();
-const upload = multer({ storage });
+export const upload = multer({ storage });
 
 // Helper function to upload image to Cloudinary
 const uploadToCloudinary = (buffer) => {
@@ -20,11 +20,8 @@ const uploadToCloudinary = (buffer) => {
   });
 };
 
-// Export multer upload middleware
-module.exports.upload = upload;
-
 // Get all courses
-module.exports.getAllCourses = async function(req, res) {
+export const getAllCourses = async function(req, res) {
   try {
     const courses = await Course.find();
     res.json(courses);
@@ -34,7 +31,7 @@ module.exports.getAllCourses = async function(req, res) {
 };
 
 // Get single course
-module.exports.getCourseById = async function(req, res) {
+export const getCourseById = async function(req, res) {
   try {
     const course = await Course.findById(req.params.id);
     if (!course) {
@@ -47,7 +44,7 @@ module.exports.getCourseById = async function(req, res) {
 };
 
 // Create course
-module.exports.createCourse = async function(req, res) {
+export const createCourse = async function(req, res) {
   try {
     let imageUrl = '';
     if (req.file) {
@@ -68,7 +65,7 @@ module.exports.createCourse = async function(req, res) {
 };
 
 // Update course
-module.exports.updateCourse = async function(req, res) {
+export const updateCourse = async function(req, res) {
   try {
     let updateData = { ...req.body };
 
@@ -92,7 +89,7 @@ module.exports.updateCourse = async function(req, res) {
 };
 
 // Delete course
-module.exports.deleteCourse = async function(req, res) {
+export const deleteCourse = async function(req, res) {
   try {
     const course = await Course.findByIdAndDelete(req.params.id);
     if (!course) {
@@ -103,3 +100,5 @@ module.exports.deleteCourse = async function(req, res) {
     res.status(500).json({ message: error.message });
   }
 };
+
+export default { getAllCourses, getCourseById, createCourse, updateCourse, deleteCourse };

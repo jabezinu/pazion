@@ -1,7 +1,7 @@
-const ContactMessage = require('../models/ContactMessage.js');
+import ContactMessage from '../models/ContactMessage.js';
 
 // Get all contact messages
-module.exports.getAllContactMessages = async function(req, res) {
+export const getAllContactMessages = async function(req, res) {
   try {
     const messages = await ContactMessage.find().sort({ createdAt: -1 });
     res.json(messages);
@@ -11,7 +11,7 @@ module.exports.getAllContactMessages = async function(req, res) {
 };
 
 // Get single contact message
-module.exports.getContactMessageById = async function(req, res) {
+export const getContactMessageById = async function(req, res) {
   try {
     const message = await ContactMessage.findById(req.params.id);
     if (!message) {
@@ -24,7 +24,7 @@ module.exports.getContactMessageById = async function(req, res) {
 };
 
 // Create contact message
-module.exports.createContactMessage = async function(req, res) {
+export const createContactMessage = async function(req, res) {
   try {
     const message = new ContactMessage(req.body);
     const newMessage = await message.save();
@@ -35,7 +35,7 @@ module.exports.createContactMessage = async function(req, res) {
 };
 
 // Update contact message (mark as read)
-module.exports.updateContactMessage = async function(req, res) {
+export const updateContactMessage = async function(req, res) {
   try {
     const message = await ContactMessage.findByIdAndUpdate(
       req.params.id,
@@ -52,7 +52,7 @@ module.exports.updateContactMessage = async function(req, res) {
 };
 
 // Delete contact message
-module.exports.deleteContactMessage = async function(req, res) {
+export const deleteContactMessage = async function(req, res) {
   try {
     const message = await ContactMessage.findByIdAndDelete(req.params.id);
     if (!message) {
@@ -63,3 +63,5 @@ module.exports.deleteContactMessage = async function(req, res) {
     res.status(500).json({ message: error.message });
   }
 };
+
+export default { getAllContactMessages, getContactMessageById, createContactMessage, updateContactMessage, deleteContactMessage };

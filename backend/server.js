@@ -1,13 +1,13 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-require('dotenv/config');
-const gemstonesRouter = require('./routes/gemstones.js');
-const coursesRouter = require('./routes/courses.js');
-const equipmentsRouter = require('./routes/equipments.js');
-const contactMessagesRouter = require('./routes/contactMessages.js');
-const commentsRouter = require('./routes/comments.js');
-const { v2: cloudinary } = require('cloudinary');
+import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
+import 'dotenv/config';
+import gemstonesRouter from './routes/gemstones.js';
+import coursesRouter from './routes/courses.js';
+import equipmentsRouter from './routes/equipments.js';
+import contactMessagesRouter from './routes/contactMessages.js';
+import commentsRouter from './routes/comments.js';
+import { v2 as cloudinary } from 'cloudinary';
 
 // Configure Cloudinary
 cloudinary.config({

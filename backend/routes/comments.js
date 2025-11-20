@@ -1,6 +1,6 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const ContactMessage = require('../models/ContactMessage.js');
+import ContactMessage from '../models/ContactMessage.js';
 
 // GET /api/comments - Get all comments marked for display on home
 router.get('/', async (req, res) => {
@@ -12,4 +12,4 @@ router.get('/', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

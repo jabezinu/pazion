@@ -1,10 +1,10 @@
-const Equipment = require('../models/Equipment.js');
-const { v2: cloudinary } = require('cloudinary');
-const multer = require('multer');
+import Equipment from '../models/Equipment.js';
+import { v2 as cloudinary } from 'cloudinary';
+import multer from 'multer';
 
 // Configure multer for memory storage
 const storage = multer.memoryStorage();
-const upload = multer({ storage });
+export const upload = multer({ storage });
 
 // Helper function to upload image to Cloudinary
 const uploadToCloudinary = (buffer) => {
@@ -20,11 +20,8 @@ const uploadToCloudinary = (buffer) => {
   });
 };
 
-// Export multer upload middleware
-module.exports.upload = upload;
-
 // Get all equipments
-module.exports.getAllEquipments = async function(req, res) {
+export const getAllEquipments = async function(req, res) {
   try {
     const equipments = await Equipment.find();
     res.json(equipments);
@@ -34,7 +31,7 @@ module.exports.getAllEquipments = async function(req, res) {
 };
 
 // Get single equipment
-module.exports.getEquipmentById = async function(req, res) {
+export const getEquipmentById = async function(req, res) {
   try {
     const equipment = await Equipment.findById(req.params.id);
     if (!equipment) {
@@ -47,7 +44,7 @@ module.exports.getEquipmentById = async function(req, res) {
 };
 
 // Create equipment
-module.exports.createEquipment = async function(req, res) {
+export const createEquipment = async function(req, res) {
   try {
     let imageUrl = '';
     if (req.file) {
@@ -68,7 +65,7 @@ module.exports.createEquipment = async function(req, res) {
 };
 
 // Update equipment
-module.exports.updateEquipment = async function(req, res) {
+export const updateEquipment = async function(req, res) {
   try {
     let updateData = { ...req.body };
 
@@ -92,7 +89,7 @@ module.exports.updateEquipment = async function(req, res) {
 };
 
 // Delete equipment
-module.exports.deleteEquipment = async function(req, res) {
+export const deleteEquipment = async function(req, res) {
   try {
     const equipment = await Equipment.findByIdAndDelete(req.params.id);
     if (!equipment) {
@@ -103,3 +100,5 @@ module.exports.deleteEquipment = async function(req, res) {
     res.status(500).json({ message: error.message });
   }
 };
+
+export default { getAllEquipments, getEquipmentById, createEquipment, updateEquipment, deleteEquipment };

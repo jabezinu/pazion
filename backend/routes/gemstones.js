@@ -1,7 +1,6 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const gemstoneController = require('../controllers/gemstoneController.js');
-const { upload } = require('../controllers/gemstoneController.js');
+import gemstoneController, { upload } from '../controllers/gemstoneController.js';
 
 // GET /api/gemstones - Get all gemstones
 router.get('/', gemstoneController.getAllGemstones);
@@ -18,4 +17,4 @@ router.put('/:id', upload.single('image'), gemstoneController.updateGemstone);
 // DELETE /api/gemstones/:id - Delete gemstone
 router.delete('/:id', gemstoneController.deleteGemstone);
 
-module.exports = router;
+export default router;

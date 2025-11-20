@@ -1,7 +1,6 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const courseController = require('../controllers/courseController.js');
-const { upload } = require('../controllers/courseController.js');
+import courseController, { upload } from '../controllers/courseController.js';
 
 // GET /api/courses - Get all courses
 router.get('/', courseController.getAllCourses);
@@ -18,4 +17,4 @@ router.put('/:id', upload.single('image'), courseController.updateCourse);
 // DELETE /api/courses/:id - Delete course
 router.delete('/:id', courseController.deleteCourse);
 
-module.exports = router;
+export default router;

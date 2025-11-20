@@ -1,7 +1,6 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const equipmentController = require('../controllers/equipmentController.js');
-const { upload } = require('../controllers/equipmentController.js');
+import equipmentController, { upload } from '../controllers/equipmentController.js';
 
 // GET /api/equipments - Get all equipments
 router.get('/', equipmentController.getAllEquipments);
@@ -18,4 +17,4 @@ router.put('/:id', upload.single('image'), equipmentController.updateEquipment);
 // DELETE /api/equipments/:id - Delete equipment
 router.delete('/:id', equipmentController.deleteEquipment);
 
-module.exports = router;
+export default router;

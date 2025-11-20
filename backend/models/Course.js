@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const courseSchema = new mongoose.Schema({
   name: {
@@ -31,4 +31,4 @@ const courseSchema = new mongoose.Schema({
   suppressReservedKeysWarning: true
 });
 
-module.exports = mongoose.model('Course', courseSchema);
+export default mongoose.model('Course', courseSchema);
