@@ -1,3 +1,40 @@
+// Request notification permission from the browser
+export const requestNotificationPermission = async () => {
+  if (!('Notification' in window)) {
+    console.log('This browser does not support notifications')
+    return false
+  }
+
+  if (Notification.permission === 'granted') {
+    return true
+  }
+
+  if (Notification.permission !== 'denied') {
+    const permission = await Notification.requestPermission()
+    return permission === 'granted'
+  }
+
+  return false
+}
+
+// Show browser notification
+export const showBrowserNotification = (title, options = {}) => {
+  if (!('Notification' in window)) {
+    console.log('This browser does not support notifications')
+    return null
+  }
+
+  if (Notification.permission === 'granted') {
+    return new Notification(title, {
+      icon: '/favicon.jpg',
+      badge: '/favicon.jpg',
+      ...options
+    })
+  }
+
+  return null
+}
+
 // Simple notification sound generator using Web Audio API
 // This creates a pleasant notification beep without needing an external file
 

@@ -4,7 +4,7 @@ import courseService from '../services/courseService'
 import equipmentService from '../services/equipmentService'
 import videoService from '../services/videoService'
 import contactMessageService from '../services/contactMessageService'
-import { createNotificationSound, playNotificationAudio } from '../utils/notificationSound'
+import { createNotificationSound, playNotificationAudio, requestNotificationPermission, showBrowserNotification } from '../utils/notificationSound'
 
 const DataContext = createContext(null)
 
@@ -51,6 +51,7 @@ export const DataProvider = ({ children }) => {
   // Track previous unread message count for notification
   const previousUnreadCountRef = useRef(null)
   const notificationAudioRef = useRef(null)
+  const notificationPermissionRequested = useRef(false)
 
   // Gemstones
   const fetchGemstones = useCallback(async (force = false) => {
@@ -182,10 +183,22 @@ export const DataProvider = ({ children }) => {
       
       // Check for new unread messages and play notification sound
       const newUnreadCount = data.filter(m => !m.read).length
+      const unreadMessages = data.filter(m => !m.read)
       
-      // Only play sound if we have a previous count and the new count is higher
+      // Only play sound and show notification if we have a previous count and the new count is higher
       if (previousUnreadCountRef.current !== null && newUnreadCount > previousUnreadCountRef.current) {
         playNotificationSound()
+        
+        // Show browser notification for the newest message
+        const newestMessage = unreadMessages[0]
+        if (newestMessage) {
+          showBrowserNotification('New Contact Message', {
+            body: `From: ${newestMessage.name}\n${newestMessage.message.substring(0, 100)}${newestMessage.message.length > 100 ? '...' : ''}`,
+            tag: 'contact-message',
+            requireInteraction: false,
+            silent: true // We're already playing our own sound
+          })
+        }
       }
       
       // Update the previous count
@@ -232,6 +245,20 @@ export const DataProvider = ({ children }) => {
       globalClearCache = null
     }
   }, [clearCache])
+
+  // Request notification permission on mount
+  useEffect(() => {
+    if (!notificationPermissionRequested.current) {
+      notificationPermissionRequested.current = true
+      requestNotificationPermission().then(granted => {
+        if (granted) {
+          console.log('Browser notifications enabled')
+        } else {
+          console.log('Browser notifications denied')
+        }
+      })
+    }
+  }, [])
 
   // Poll for new contact messages every 10 seconds
   useEffect(() => {

@@ -1,13 +1,23 @@
-# Notification Sound Setup
+# Notification System Setup
 
 ## Overview
-The admin panel now automatically plays a notification sound when new messages are received from clients.
+The admin panel now automatically notifies you when new messages are received from clients with both sound and browser notifications.
 
 ## How It Works
 
 1. **Automatic Polling**: The system checks for new messages every 10 seconds
 2. **Sound Notification**: When a new unread message is detected, a notification sound plays immediately
-3. **Fallback System**: If the audio file is not available, a generated beep sound plays instead
+3. **Browser Notification**: A system notification appears in your device's notification center
+4. **Fallback System**: If the audio file is not available, a generated beep sound plays instead
+
+## Browser Notifications
+
+When you first load the admin panel, you'll be asked to allow notifications. Click "Allow" to receive notifications in your device's notification section.
+
+The notification will show:
+- Title: "New Contact Message"
+- Sender's name
+- Preview of the message (first 100 characters)
 
 ## Adding a Custom Notification Sound (Optional)
 
@@ -52,6 +62,18 @@ const pollInterval = setInterval(() => {
 - Try clicking anywhere on the page first (browsers require user interaction for audio)
 - The fallback generated sound should work even without the MP3 file
 
+**No browser notifications?**
+- Check if you allowed notifications when prompted
+- Check your browser's notification settings (usually in browser settings or site permissions)
+- On Windows: Check Windows notification settings
+- On Mac: Check System Preferences > Notifications
+- Try refreshing the page and allowing notifications again
+
 **Sound plays multiple times?**
 - This is expected if multiple new messages arrive
 - Each new unread message triggers one notification sound
+
+**Notifications not showing on mobile?**
+- Ensure your browser supports notifications (Chrome, Firefox, Safari on iOS 16.4+)
+- Check your device's notification settings for the browser app
+- Some mobile browsers require the site to be added to home screen for notifications
