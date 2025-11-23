@@ -1,20 +1,21 @@
 import express from 'express';
 const router = express.Router();
 import gemstoneController, { upload } from '../controllers/gemstoneController.js';
+import { authenticateAdmin } from '../middleware/auth.js';
 
-// GET /api/gemstones - Get all gemstones
+// GET /api/gemstones - Get all gemstones (public)
 router.get('/', gemstoneController.getAllGemstones);
 
-// GET /api/gemstones/:id - Get single gemstone
+// GET /api/gemstones/:id - Get single gemstone (public)
 router.get('/:id', gemstoneController.getGemstoneById);
 
-// POST /api/gemstones - Create new gemstone
-router.post('/', upload.single('image'), gemstoneController.createGemstone);
+// POST /api/gemstones - Create new gemstone (protected)
+router.post('/', authenticateAdmin, upload.single('image'), gemstoneController.createGemstone);
 
-// PUT /api/gemstones/:id - Update gemstone
-router.put('/:id', upload.single('image'), gemstoneController.updateGemstone);
+// PUT /api/gemstones/:id - Update gemstone (protected)
+router.put('/:id', authenticateAdmin, upload.single('image'), gemstoneController.updateGemstone);
 
-// DELETE /api/gemstones/:id - Delete gemstone
-router.delete('/:id', gemstoneController.deleteGemstone);
+// DELETE /api/gemstones/:id - Delete gemstone (protected)
+router.delete('/:id', authenticateAdmin, gemstoneController.deleteGemstone);
 
 export default router;

@@ -8,6 +8,17 @@ const api = axios.create({
   },
 })
 
+// Add authentication token to all requests
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem('adminToken')
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`
+  }
+  return config
+}, (error) => {
+  return Promise.reject(error)
+})
+
 export const courseService = {
   // Get all courses
   getAll: async () => {
@@ -24,7 +35,7 @@ export const courseService = {
   // Create new course
   create: async (courseData) => {
     const formData = new FormData()
-  
+
     // Add all fields to FormData
     Object.keys(courseData).forEach(key => {
       if (key === 'image' && courseData[key] instanceof File) {
@@ -33,7 +44,7 @@ export const courseService = {
         formData.append(key, courseData[key])
       }
     })
-  
+
     const response = await api.post('/courses', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
@@ -41,11 +52,11 @@ export const courseService = {
     })
     return response.data
   },
-  
+
   // Update course
   update: async (id, courseData) => {
     const formData = new FormData()
-  
+
     // Add all fields to FormData
     Object.keys(courseData).forEach(key => {
       if (key === 'image' && courseData[key] instanceof File) {
@@ -54,7 +65,7 @@ export const courseService = {
         formData.append(key, courseData[key])
       }
     })
-  
+
     const response = await api.put(`/courses/${id}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
