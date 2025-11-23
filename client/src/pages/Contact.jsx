@@ -19,7 +19,7 @@ export default function Contact() {
       getInTouch: 'Get In Touch',
       description: "Have questions about our services or want to discuss a potential partnership? We'd love to hear from you. Send us a message and we'll respond as soon as possible.",
       address: 'Address',
-      addressValue: '123 Gem Street, Diamond City, DC 12345',
+      addressValue: 'Addis Ababa, Ethiopia',
       phone: 'Phone',
       phoneValue: '+251941913877',
       email: 'Email',
@@ -38,7 +38,7 @@ export default function Contact() {
       getInTouch: 'ተገናኝ',
       description: 'ስለ አገልግሎታችን ጥያቄዎች አሉዎት ወይም ከእኛ ጋር መወያየት ይፈልጋሉ? ከእርስዎ መስማት እንፈልጋለን። መልእክት ይላኩልን እና በተቻለ ፍጥነት እንመልሳለን።',
       address: 'አድራሻ',
-      addressValue: '123 የጌም ጎዳና፣ ዳይመንድ ከተማ፣ ዲሲ 12345',
+      addressValue: 'አዲስ አበባ፣ ኢትዮጵያ',
       phone: 'ስልክ',
       phoneValue: '+251941913877',
       email: 'ኢሜይል',
@@ -119,16 +119,17 @@ export default function Contact() {
 
           <div className="mt-8">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509374!2d144.9537353153168!3d-37.816279742021665!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577d4a32ddf9f0!2sMelbourne%20CBD%2C%20Victoria%2C%20Australia!5e0!3m2!1sen!2s!4v1633072800000!5m2!1sen!2s"
+              src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3001.547335676859!2d38.800583!3d9.018718999999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m1!2zOcKwMDEnMDcuNCJOIDM4wrA0OCcwMi4xIkU!5e1!3m2!1sen!2set!4v1763892230826!5m2!1sen!2set"
               width="100%"
               height="300"
               style={{ border: 0 }}
               allowFullScreen=""
               loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
               className="rounded-lg shadow-md"
             ></iframe>
             <button
-              onClick={() => window.open('https://www.google.com/maps/place/123+Gem+Street,+Diamond+City,+DC+12345', '_blank')}
+              onClick={() => window.open('https://www.google.com/maps?q=9.018719,38.800583', '_blank')}
               className="mt-4 w-full bg-red-600 text-white py-3 px-4 rounded-lg hover:bg-red-700 transition duration-300 font-semibold"
             >
               {t.reviewOnGoogleMaps}
