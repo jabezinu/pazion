@@ -8,12 +8,21 @@ const api = axios.create({
   },
 })
 
-// Add authentication token to all requests
+// Add authentication token to all requests and cache-busting for GET requests
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('adminToken')
   if (token) {
     config.headers.Authorization = `Bearer ${token}`
   }
+
+  // Add cache-busting for GET requests
+  if (config.method === 'get') {
+    config.params = {
+      ...config.params,
+      _t: Date.now()
+    };
+  }
+
   return config
 }, (error) => {
   return Promise.reject(error)
