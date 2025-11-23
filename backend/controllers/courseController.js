@@ -1,10 +1,10 @@
-import Course from '../models/Course.js';
-import { v2 as cloudinary } from 'cloudinary';
-import multer from 'multer';
+const Course = require('../models/Course');
+const cloudinary = require('cloudinary').v2;
+const multer = require('multer');
 
 // Configure multer for memory storage
 const storage = multer.memoryStorage();
-export const upload = multer({ storage });
+const upload = multer({ storage });
 
 // Helper function to upload image to Cloudinary
 const uploadToCloudinary = (buffer) => {
@@ -21,7 +21,7 @@ const uploadToCloudinary = (buffer) => {
 };
 
 // Get all courses
-export const getAllCourses = async function(req, res) {
+const getAllCourses = async function (req, res) {
   try {
     const courses = await Course.find();
     res.json(courses);
@@ -31,7 +31,7 @@ export const getAllCourses = async function(req, res) {
 };
 
 // Get single course
-export const getCourseById = async function(req, res) {
+const getCourseById = async function (req, res) {
   try {
     const course = await Course.findById(req.params.id);
     if (!course) {
@@ -44,7 +44,7 @@ export const getCourseById = async function(req, res) {
 };
 
 // Create course
-export const createCourse = async function(req, res) {
+const createCourse = async function (req, res) {
   try {
     let imageUrl = '';
     if (req.file) {
@@ -65,7 +65,7 @@ export const createCourse = async function(req, res) {
 };
 
 // Update course
-export const updateCourse = async function(req, res) {
+const updateCourse = async function (req, res) {
   try {
     let updateData = { ...req.body };
 
@@ -89,7 +89,7 @@ export const updateCourse = async function(req, res) {
 };
 
 // Delete course
-export const deleteCourse = async function(req, res) {
+const deleteCourse = async function (req, res) {
   try {
     const course = await Course.findByIdAndDelete(req.params.id);
     if (!course) {
@@ -101,4 +101,4 @@ export const deleteCourse = async function(req, res) {
   }
 };
 
-export default { getAllCourses, getCourseById, createCourse, updateCourse, deleteCourse };
+module.exports = { getAllCourses, getCourseById, createCourse, updateCourse, deleteCourse, upload };

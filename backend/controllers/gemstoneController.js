@@ -1,10 +1,10 @@
-import Gemstone from '../models/Gemstone.js';
-import { v2 as cloudinary } from 'cloudinary';
-import multer from 'multer';
+const Gemstone = require('../models/Gemstone');
+const cloudinary = require('cloudinary').v2;
+const multer = require('multer');
 
 // Configure multer for memory storage
 const storage = multer.memoryStorage();
-export const upload = multer({ storage });
+const upload = multer({ storage });
 
 // Helper function to upload image to Cloudinary
 const uploadToCloudinary = (buffer) => {
@@ -21,7 +21,7 @@ const uploadToCloudinary = (buffer) => {
 };
 
 // Get all gemstones
-export const getAllGemstones = async function(req, res) {
+const getAllGemstones = async function (req, res) {
   try {
     const gemstones = await Gemstone.find();
     res.json(gemstones);
@@ -31,7 +31,7 @@ export const getAllGemstones = async function(req, res) {
 };
 
 // Get single gemstone
-export const getGemstoneById = async function(req, res) {
+const getGemstoneById = async function (req, res) {
   try {
     const gemstone = await Gemstone.findById(req.params.id);
     if (!gemstone) {
@@ -44,7 +44,7 @@ export const getGemstoneById = async function(req, res) {
 };
 
 // Create gemstone
-export const createGemstone = async function(req, res) {
+const createGemstone = async function (req, res) {
   try {
     let imageUrl = '';
     if (req.file) {
@@ -65,7 +65,7 @@ export const createGemstone = async function(req, res) {
 };
 
 // Update gemstone
-export const updateGemstone = async function(req, res) {
+const updateGemstone = async function (req, res) {
   try {
     let updateData = { ...req.body };
 
@@ -89,7 +89,7 @@ export const updateGemstone = async function(req, res) {
 };
 
 // Delete gemstone
-export const deleteGemstone = async function(req, res) {
+const deleteGemstone = async function (req, res) {
   try {
     const gemstone = await Gemstone.findByIdAndDelete(req.params.id);
     if (!gemstone) {
@@ -100,4 +100,4 @@ export const deleteGemstone = async function(req, res) {
     res.status(500).json({ message: error.message });
   }
 };
-export default { getAllGemstones, getGemstoneById, createGemstone, updateGemstone, deleteGemstone };
+module.exports = { getAllGemstones, getGemstoneById, createGemstone, updateGemstone, deleteGemstone, upload };

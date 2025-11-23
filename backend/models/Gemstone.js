@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const gemstoneSchema = new mongoose.Schema({
   nameKey: {
@@ -28,4 +28,4 @@ const gemstoneSchema = new mongoose.Schema({
   suppressReservedKeysWarning: true
 });
 
-export default mongoose.model('Gemstone', gemstoneSchema);
+module.exports = mongoose.model('Gemstone', gemstoneSchema);

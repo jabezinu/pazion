@@ -1,7 +1,7 @@
-import express from 'express';
+const express = require('express');
 const router = express.Router();
-import videoController from '../controllers/videoController.js';
-import { authenticateAdmin } from '../middleware/auth.js';
+const videoController = require('../controllers/videoController');
+const { authenticateAdmin } = require('../middleware/auth');
 
 // GET /api/videos - Get all videos (public)
 router.get('/', videoController.getAllVideos);
@@ -18,4 +18,4 @@ router.put('/:id', authenticateAdmin, videoController.updateVideo);
 // DELETE /api/videos/:id - Delete video (protected)
 router.delete('/:id', authenticateAdmin, videoController.deleteVideo);
 
-export default router;
+module.exports = router;

@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
-import Gemstone from './models/Gemstone.js';
-import Course from './models/Course.js';
+const mongoose = require('mongoose');
+const Gemstone = require('./models/Gemstone');
+const Course = require('./models/Course');
 
 const gemstonesData = [
   {

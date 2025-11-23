@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import Admin from './models/Admin.js';
+const mongoose = require('mongoose');
+const Admin = require('./models/Admin');
 
 const seedAdmin = async () => {
   try {

@@ -1,7 +1,7 @@
-import express from 'express';
+const express = require('express');
 const router = express.Router();
-import contactMessageController from '../controllers/contactMessageController.js';
-import { authenticateAdmin } from '../middleware/auth.js';
+const contactMessageController = require('../controllers/contactMessageController');
+const { authenticateAdmin } = require('../middleware/auth');
 
 // GET /api/contact-messages - Get all contact messages (protected)
 router.get('/', authenticateAdmin, contactMessageController.getAllContactMessages);
@@ -18,4 +18,4 @@ router.put('/:id', authenticateAdmin, contactMessageController.updateContactMess
 // DELETE /api/contact-messages/:id - Delete contact message (protected)
 router.delete('/:id', authenticateAdmin, contactMessageController.deleteContactMessage);
 
-export default router;
+module.exports = router;

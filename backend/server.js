@@ -1,14 +1,14 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import cors from 'cors';
-import gemstonesRouter from './routes/gemstones.js';
-import coursesRouter from './routes/courses.js';
-import equipmentsRouter from './routes/equipments.js';
-import contactMessagesRouter from './routes/contactMessages.js';
-import commentsRouter from './routes/comments.js';
-import videosRouter from './routes/videos.js';
-import authRouter from './routes/auth.js';
-import { v2 as cloudinary } from 'cloudinary';
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const gemstonesRouter = require('./routes/gemstones');
+const coursesRouter = require('./routes/courses');
+const equipmentsRouter = require('./routes/equipments');
+const contactMessagesRouter = require('./routes/contactMessages');
+const commentsRouter = require('./routes/comments');
+const videosRouter = require('./routes/videos');
+const authRouter = require('./routes/auth');
+const cloudinary = require('cloudinary').v2;
 
 // Configure Cloudinary
 cloudinary.config({

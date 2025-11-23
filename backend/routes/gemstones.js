@@ -1,7 +1,8 @@
-import express from 'express';
+const express = require('express');
 const router = express.Router();
-import gemstoneController, { upload } from '../controllers/gemstoneController.js';
-import { authenticateAdmin } from '../middleware/auth.js';
+const gemstoneController = require('../controllers/gemstoneController');
+const { upload } = gemstoneController;
+const { authenticateAdmin } = require('../middleware/auth');
 
 // GET /api/gemstones - Get all gemstones (public)
 router.get('/', gemstoneController.getAllGemstones);
@@ -18,4 +19,4 @@ router.put('/:id', authenticateAdmin, upload.single('image'), gemstoneController
 // DELETE /api/gemstones/:id - Delete gemstone (protected)
 router.delete('/:id', authenticateAdmin, gemstoneController.deleteGemstone);
 
-export default router;
+module.exports = router;

@@ -1,7 +1,8 @@
-import express from 'express';
+const express = require('express');
 const router = express.Router();
-import courseController, { upload } from '../controllers/courseController.js';
-import { authenticateAdmin } from '../middleware/auth.js';
+const courseController = require('../controllers/courseController');
+const { upload } = courseController;
+const { authenticateAdmin } = require('../middleware/auth');
 
 // GET /api/courses - Get all courses (public)
 router.get('/', courseController.getAllCourses);
@@ -18,4 +19,4 @@ router.put('/:id', authenticateAdmin, upload.single('image'), courseController.u
 // DELETE /api/courses/:id - Delete course (protected)
 router.delete('/:id', authenticateAdmin, courseController.deleteCourse);
 
-export default router;
+module.exports = router;

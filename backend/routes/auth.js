@@ -1,7 +1,7 @@
-import express from 'express';
-import jwt from 'jsonwebtoken';
-import Admin from '../models/Admin.js';
-import { authenticateAdmin } from '../middleware/auth.js';
+const express = require('express');
+const jwt = require('jsonwebtoken');
+const Admin = require('../models/Admin');
+const { authenticateAdmin } = require('../middleware/auth');
 
 const router = express.Router();
 
@@ -75,4 +75,4 @@ router.post('/change-password', authenticateAdmin, async (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;

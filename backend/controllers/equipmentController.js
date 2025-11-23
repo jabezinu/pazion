@@ -1,10 +1,10 @@
-import Equipment from '../models/Equipment.js';
-import { v2 as cloudinary } from 'cloudinary';
-import multer from 'multer';
+const Equipment = require('../models/Equipment');
+const cloudinary = require('cloudinary').v2;
+const multer = require('multer');
 
 // Configure multer for memory storage
 const storage = multer.memoryStorage();
-export const upload = multer({ storage });
+const upload = multer({ storage });
 
 // Helper function to upload image to Cloudinary
 const uploadToCloudinary = (buffer) => {
@@ -21,7 +21,7 @@ const uploadToCloudinary = (buffer) => {
 };
 
 // Get all equipments
-export const getAllEquipments = async function(req, res) {
+const getAllEquipments = async function (req, res) {
   try {
     const equipments = await Equipment.find();
     res.json(equipments);
@@ -31,7 +31,7 @@ export const getAllEquipments = async function(req, res) {
 };
 
 // Get single equipment
-export const getEquipmentById = async function(req, res) {
+const getEquipmentById = async function (req, res) {
   try {
     const equipment = await Equipment.findById(req.params.id);
     if (!equipment) {
@@ -44,7 +44,7 @@ export const getEquipmentById = async function(req, res) {
 };
 
 // Create equipment
-export const createEquipment = async function(req, res) {
+const createEquipment = async function (req, res) {
   try {
     let imageUrl = '';
     if (req.file) {
@@ -65,7 +65,7 @@ export const createEquipment = async function(req, res) {
 };
 
 // Update equipment
-export const updateEquipment = async function(req, res) {
+const updateEquipment = async function (req, res) {
   try {
     let updateData = { ...req.body };
 
@@ -89,7 +89,7 @@ export const updateEquipment = async function(req, res) {
 };
 
 // Delete equipment
-export const deleteEquipment = async function(req, res) {
+const deleteEquipment = async function (req, res) {
   try {
     const equipment = await Equipment.findByIdAndDelete(req.params.id);
     if (!equipment) {
@@ -101,4 +101,4 @@ export const deleteEquipment = async function(req, res) {
   }
 };
 
-export default { getAllEquipments, getEquipmentById, createEquipment, updateEquipment, deleteEquipment };
+module.exports = { getAllEquipments, getEquipmentById, createEquipment, updateEquipment, deleteEquipment, upload };

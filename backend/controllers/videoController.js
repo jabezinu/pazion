@@ -1,7 +1,7 @@
-import Video from '../models/Video.js';
+const Video = require('../models/Video');
 
 // Get all videos
-export const getAllVideos = async function(req, res) {
+const getAllVideos = async function (req, res) {
   try {
     const { sort } = req.query;
     let sortOption = {};
@@ -18,7 +18,7 @@ export const getAllVideos = async function(req, res) {
 };
 
 // Get single video
-export const getVideoById = async function(req, res) {
+const getVideoById = async function (req, res) {
   try {
     const video = await Video.findById(req.params.id);
     if (!video) {
@@ -31,7 +31,7 @@ export const getVideoById = async function(req, res) {
 };
 
 // Create video
-export const createVideo = async function(req, res) {
+const createVideo = async function (req, res) {
   try {
     const video = new Video(req.body);
     const newVideo = await video.save();
@@ -42,7 +42,7 @@ export const createVideo = async function(req, res) {
 };
 
 // Update video
-export const updateVideo = async function(req, res) {
+const updateVideo = async function (req, res) {
   try {
     const video = await Video.findByIdAndUpdate(
       req.params.id,
@@ -59,7 +59,7 @@ export const updateVideo = async function(req, res) {
 };
 
 // Delete video
-export const deleteVideo = async function(req, res) {
+const deleteVideo = async function (req, res) {
   try {
     const video = await Video.findByIdAndDelete(req.params.id);
     if (!video) {
@@ -71,4 +71,4 @@ export const deleteVideo = async function(req, res) {
   }
 };
 
-export default { getAllVideos, getVideoById, createVideo, updateVideo, deleteVideo };
+module.exports = { getAllVideos, getVideoById, createVideo, updateVideo, deleteVideo };

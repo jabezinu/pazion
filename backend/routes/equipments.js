@@ -1,7 +1,8 @@
-import express from 'express';
+const express = require('express');
 const router = express.Router();
-import equipmentController, { upload } from '../controllers/equipmentController.js';
-import { authenticateAdmin } from '../middleware/auth.js';
+const equipmentController = require('../controllers/equipmentController');
+const { upload } = equipmentController;
+const { authenticateAdmin } = require('../middleware/auth');
 
 // GET /api/equipments - Get all equipments (public)
 router.get('/', equipmentController.getAllEquipments);
@@ -18,4 +19,4 @@ router.put('/:id', authenticateAdmin, upload.single('image'), equipmentControlle
 // DELETE /api/equipments/:id - Delete equipment (protected)
 router.delete('/:id', authenticateAdmin, equipmentController.deleteEquipment);
 
-export default router;
+module.exports = router;

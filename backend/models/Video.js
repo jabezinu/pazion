@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const videoSchema = new mongoose.Schema({
   title: {
@@ -18,4 +18,4 @@ const videoSchema = new mongoose.Schema({
   suppressReservedKeysWarning: true
 });
 
-export default mongoose.model('Video', videoSchema);
+module.exports = mongoose.model('Video', videoSchema);
