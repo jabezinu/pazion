@@ -56,22 +56,10 @@ export default function About() {
         subtitle: 'Our team of dedicated professionals brings together decades of experience in the gemstone industry.',
         members: [
           {
-            name: 'David Thompson',
-            role: 'Training Director',
-            description: 'Leads our certification programs and professional development.',
-            expertise: ['Gemology', 'Marketing', 'Certification']
-          },
-          {
-            name: 'Lisa Park',
-            role: 'Client Relations Manager',
-            description: 'Dedicated to providing exceptional service to our clients worldwide.',
-            expertise: ['Client Service', 'Global Markets', 'Consulting']
-          },
-          {
-            name: 'Robert Kim',
-            role: 'Technical Specialist',
-            description: 'Manages our state-of-the-art equipment and laboratory operations.',
-            expertise: ['Lab Operations', 'Gemstone Testing', 'Research']
+            name: 'Kaleab Belay',
+            role: 'CEO',
+            description: 'Leading kalgemstones with expertise and vision in the gemstone industry.',
+            expertise: ['Gemology', 'Business Strategy', 'International Trade']
           }
         ]
       },
@@ -129,22 +117,10 @@ export default function About() {
         // subtitle: 'የእኛ የተወደዱ ባለሙያዎች ቡድን በውድ እንቁ ኢንዱስትሪ ውስጥ በአሥርተ ዓመታት ልምድ አንድ ላይ ያመጣል።',
         members: [
           {
-            name: 'ቃል',
-            role: 'የሥልጠና ዳይሬክተር',
-            description: 'የምስክር ወረቀት ፕሮግራሞቻችንን እና ሙያዊ እድገትን ይመራል።',
-            expertise: ['ጂሞሎጂ', 'ትምህርት', 'የምስክር ወረቀት']
-          },
-          {
-            name: 'ሊዛ ፓርክ',
-            role: 'የደንበኛ ግንኙነት አስተዳዳሪ',
-            description: 'በዓለም ዙሪያ ላሉ ደንበኞቻችን ልዩ አገልግሎት ለመስጠት ቆርጠዋል።',
-            expertise: ['የደንበኛ አገልግሎት', 'ዓለም አቀፍ ገበያዎች', 'ማማከር']
-          },
-          {
-            name: 'ሮበርት ኪም',
-            role: 'ቴክኒካል ስፔሻሊስት',
-            description: 'ዘመናዊ መሳሪያዎቻችንን እና ላቦራቶሪ ስራዎችን ያስተዳድራል።',
-            expertise: ['ላብራቶሪ ስራዎች', 'የውድ እንቁ ምርመራ', 'ምርምር']
+            name: 'ቃለአብ በላይ',
+            role: 'ዋና ሥራ አስፈፃሚ',
+            description: 'በውድ እንቁ ኢንዱስትሪ ውስጥ በብቃት እና በራእይ kalgemstones ን እየመራ።',
+            expertise: ['ጂሞሎጂ', 'የንግድ ስትራቴጂ', 'ዓለም አቀፍ ንግድ']
           }
         ]
       },
@@ -158,9 +134,7 @@ export default function About() {
   const t = content[language];
 
   const teamImages = [
-    kalImage,
-    'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=face',
-    'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face'
+    kalImage
   ];
 
   return (
@@ -229,11 +203,10 @@ export default function About() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {t.values.items.map((value, index) => (
                 <div key={index} className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 hover:bg-white/20 transition-all duration-300 hover:transform hover:scale-105">
-                  <div className={`w-16 h-16 bg-gradient-to-br ${
-                    index === 0 ? 'from-yellow-400 to-orange-500' :
-                    index === 1 ? 'from-green-400 to-emerald-500' :
-                    'from-purple-400 to-pink-500'
-                  } rounded-2xl flex items-center justify-center text-3xl mb-4 shadow-lg mx-auto`}>
+                  <div className={`w-16 h-16 bg-gradient-to-br ${index === 0 ? 'from-yellow-400 to-orange-500' :
+                      index === 1 ? 'from-green-400 to-emerald-500' :
+                        'from-purple-400 to-pink-500'
+                    } rounded-2xl flex items-center justify-center text-3xl mb-4 shadow-lg mx-auto`}>
                     {index === 0 ? <Trophy size={30} className="text-white" /> : index === 1 ? <Handshake size={30} className="text-white" /> : <Sparkles size={30} className="text-white" />}
                   </div>
                   <h3 className="text-xl font-bold mb-3 text-center">{value.title}</h3>
@@ -259,25 +232,25 @@ export default function About() {
               <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">{t.team.title}</h2>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">{t.team.subtitle}</p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+            <div className="flex justify-center">
               {t.team.members.map((member, index) => (
-                <div key={index} className="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500">
+                <div key={index} className="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 w-full max-w-md">
                   <div className="aspect-w-4 aspect-h-5">
-                    <img 
-                      src={teamImages[index]} 
-                      alt={member.name} 
+                    <img
+                      src={teamImages[index]}
+                      alt={member.name}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   </div>
-                  
+
                   <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
                     <h3 className="text-2xl font-bold mb-2">{member.name}</h3>
                     <p className="text-blue-300 font-medium mb-3">{member.role}</p>
                     <p className="text-gray-300 mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
                       {member.description}
                     </p>
-                    
+
                     <div className="flex flex-wrap gap-2 mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">
                       {member.expertise.map((skill, i) => (
                         <span key={i} className="px-3 py-1 bg-blue-600/30 rounded-full text-sm text-blue-200">
@@ -285,16 +258,16 @@ export default function About() {
                         </span>
                       ))}
                     </div>
-                    
+
                     <div className="flex gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-300">
                       <a href="#" className="text-white hover:text-blue-400 transition-colors">
                         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                         </svg>
                       </a>
                       <a href="#" className="text-white hover:text-blue-400 transition-colors">
                         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                          <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>
+                          <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
                         </svg>
                       </a>
                     </div>
