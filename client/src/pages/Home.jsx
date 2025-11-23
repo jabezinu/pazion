@@ -278,9 +278,14 @@ export default function GemstonHomepage() {
         <div className="relative z-10 h-full flex items-center">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl">
-              <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 animate-fade-in">
-                {t.heroTitle}
-              </h1>
+              <div className="mb-8 animate-fade-in">
+                <h1 className="text-6xl md:text-8xl font-bold bg-gradient-to-r from-yellow-400 via-white to-yellow-200 bg-clip-text text-transparent mb-4 drop-shadow-2xl">
+                  KalGemstone
+                </h1>
+                <p className="text-3xl md:text-5xl font-light text-white/95 italic animate-pulse">
+                  Shine Like A Gemstone
+                </p>
+              </div>
               <p className="text-xl md:text-2xl text-gray-200 mb-8">
                 {t.heroSubtitle}
               </p>
@@ -361,11 +366,7 @@ export default function GemstonHomepage() {
                 <div className="p-6">
                    <h3 className="text-xl font-bold text-gray-900 mb-2">{gem.carat}</h3>
                    <p className="text-gray-600 mb-4">{gem.name}</p>
-                   <div className="flex justify-center">
-                     <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full text-sm font-semibold transition">
-                       {t.viewDetails}
-                     </button>
-                   </div>
+
                  </div>
               </div>
             ))}
