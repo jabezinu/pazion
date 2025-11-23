@@ -235,12 +235,12 @@ export default function GemstonHomepage() {
   }, [testimonials.length]);
 
   const services = [
-    { id: "buying-selling", icon: ShoppingBag, title: t.buyGemstones, desc: t.buyDesc },
-    { id: "buying-selling", icon: Award, title: t.sellGemstones, desc: t.sellDesc },
-    { id: "gemstone-testing", icon: TestTube, title: t.gemstoneTesting, desc: t.testingDesc },
-    { id: "machines", icon: Wrench, title: t.equipmentTools, desc: t.equipmentDesc },
-    { id: "courses", icon: GraduationCap, title: t.trainingCourses, desc: t.trainingDesc },
-    { id: "buying-selling", icon: MessageCircle, title: t.consultation, desc: t.consultationDesc }
+    { id: "buying-selling", path: "/services#buying-selling", icon: ShoppingBag, title: t.buyGemstones, desc: t.buyDesc },
+    { id: "buying-selling", path: "/services#buying-selling", icon: Award, title: t.sellGemstones, desc: t.sellDesc },
+    { id: "gemstone-testing", path: "/services#gemstone-testing", icon: TestTube, title: t.gemstoneTesting, desc: t.testingDesc },
+    { id: "equipment", path: "/equipment", icon: Wrench, title: t.equipmentTools, desc: t.equipmentDesc },
+    { id: "courses", path: "/services#courses", icon: GraduationCap, title: t.trainingCourses, desc: t.trainingDesc },
+    { id: "buying-selling", path: "/services#buying-selling", icon: MessageCircle, title: t.consultation, desc: t.consultationDesc }
   ];
 
   const featuredGems = [
@@ -326,7 +326,7 @@ export default function GemstonHomepage() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, idx) => (
-              <Link key={idx} to={`/services#${service.id}`} className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2 cursor-pointer group">
+              <Link key={idx} to={service.path} className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2 cursor-pointer group">
                 <service.icon className="w-12 h-12 text-blue-600 mb-4 group-hover:scale-110 transition" />
                 <h3 className="text-xl font-bold text-gray-900 mb-2">{service.title}</h3>
                 <p className="text-gray-600 mb-4">{service.desc}</p>

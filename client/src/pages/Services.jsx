@@ -8,10 +8,9 @@ import toast from 'react-hot-toast';
 export default function Services() {
   const { language } = useLanguage();
   const location = useLocation();
-  const { courses, equipments, loading, errors } = useData();
-  
+  const { courses, loading, errors } = useData();
+
   const coursesLoading = loading.courses;
-  const equipmentsLoading = loading.equipments;
 
   useEffect(() => {
     if (location.hash) {
@@ -26,10 +25,7 @@ export default function Services() {
     if (errors.courses) {
       toast.error('Failed to load courses. Please try again later.');
     }
-    if (errors.equipments) {
-      toast.error('Failed to load equipment. Please try again later.');
-    }
-  }, [errors.courses, errors.equipments]);
+  }, [errors.courses]);
 
   const translations = {
     en: {
@@ -132,30 +128,6 @@ export default function Services() {
           ],
           benefits: "Small class sizes • Professional equipment access • Career networking events"
         },
-        {
-          id: "machines",
-          title: "Equipment Sales",
-          description: "High-quality tools and machinery for gemstone testing, cutting, and processing. We supply professional-grade equipment for gemologists, jewelers, lapidaries, and educational institutions. From precision loupes to advanced cutting machines, we stock everything you need with expert guidance and full support.",
-          price: "Varies",
-          features: [
-            "Professional-grade precision loupes and microscopes",
-            "Advanced testing and analysis equipment",
-            "Complete cutting and faceting tool systems",
-            "Industrial processing machinery and supplies",
-            "New and certified refurbished equipment options",
-            "Comprehensive warranty and technical support",
-            "Free equipment training and setup assistance",
-            "Trade-in programs and financing plans"
-          ],
-          categories: [
-            { name: "Testing & Analysis Equipment", items: "Refractometers • Spectrometers • UV Lamps • Dichroscopes • Polariscopes • Thermal Conductivity Meters" },
-            { name: "Magnification & Observation", items: "10x Triplet Loupes • Binocular Microscopes • LED Illuminators • Darkfield Systems" },
-            { name: "Cutting & Faceting Tools", items: "Faceting Machines • Cabbing Equipment • Polishing Wheels • Diamond Discs • Lap Systems" },
-            { name: "Processing Machinery", items: "Rock Tumblers • Ultrasonic Cleaners • Vacuum Chambers • Trim Saws • Grinding Equipment" }
-          ],
-          brands: "We carry top brands including Zeiss • Presidium • GemOro • Ultra Tec • Grobet • Kassoy • Foredom • Crystalite",
-          support: "Free installation assistance • Equipment training included • Technical support hotline • Maintenance services • Replacement parts inventory"
-        }
       ]
     },
     am: {
@@ -243,29 +215,6 @@ export default function Services() {
           ],
           benefits: "ትንሽ ተማሪ ነው ምንቀበለው • የሙያ መሳሪያ መዳረሻ • አዳዲስ የሥራ ሰዎች ሚገኙበት"
         },
-        {
-          id: "machines",
-          title: "የመሳሪያ ሽያጭ",
-          description: "ጥራት ያላቸው መሳሪያዎች እና ማሽኖች። ለመአድን አውጪዎች እና ለጌጣጌጥ ሠሪዎች መሳሪያዎችን እናቀርባለን። ከባለሙያ መመሪያ እና ሙሉ ድጋፍ ጋር የሚፈልጉትን ሁሉ እናቀርባለን።",
-          price: "ይለያያል",
-          features: [
-            "የላቁ የምርመራ እና የትንተና መሳሪያዎች",
-            "ሙሉ የመቁረጫ እና የፊሴቲንግ መሳሪያ ስርዓቶች",
-            "የኢንዱስትሪ ማቀናበሪያ ማሽኖች እና አቅርቦቶች",
-            "አዲስ እና የተረጋገጠ የተስተካከለ የመሳሪያ አማራጮች",
-            "አጠቃላይ ዋስትና እና ቴክኒካል ድጋፍ",
-            "ነጻ የመሳሪያ ስልጠና እና የማዋቀሪያ እርዳታ",
-            "የንግድ-ግብይት ፕሮግራሞች እና የፋይናንስ እቅዶች"
-          ],
-          categories: [
-            { name: "የምርመራ እና የትንተና መሳሪያዎች", items: "ማለፊያ መለኪያዎች • ስፔክትሮሜትሮች • የአልትራቫዮሌት መብራቶች • ዲክሮስኮፖች • ፖላሪስኮፖች • የሙቀት ማስተላለፊያ መለኪያዎች" },
-            { name: "ማጉላት እና ምልከታ", items: "10x ትሪፕሌት ሉፕስ • ባይኖኩላር ማይክሮስኮፖች • LED ማብራቶች • ዳርክፊልድ ስርዓቶች" },
-            { name: "የመቁረጫ እና ፊሴቲንግ መሳሪያዎች", items: "ፊሴቲንግ ማሽኖች • ካቢንግ መሳሪያዎች • የማሸት ጎማዎች • የአልማዝ ዲስኮች • የኮድ ስርዓቶች" },
-            { name: "የማቀናበሪያ ማሽኖች", items: "የድንጋይ ማሽከርከር ማሽኖች • አልትራሳውንድ ማጽጃዎች • ክፍት ክፍሎች • የመቁረጫ መናጭቶች • የመፍጫ መሳሪያዎች" }
-          ],
-          brands: "የሚከተሉትን ከፍተኛ ብራንዶች እንሸጣለን፡ Zeiss • Presidium • GemOro • Ultra Tec • Grobet • Kassoy • Foredom • Crystalite",
-          support: "ነጻ የመጫኛ እርዳታ • የመሳሪያ ስልጠና የተካተተ • የቴክኒካል ድጋፍ የስልክ መስመር • የጥገና አገልግሎቶች • የመለዋወጫ ክፍሎች ክምችት"
-        }
       ]
     }
   };
@@ -450,64 +399,6 @@ export default function Services() {
                   </>
                 )}
 
-                {service.id === 'machines' && (
-                  <>
-                    {/* Available Equipments */}
-                    <div className="mb-12">
-                      <div className="flex items-center mb-6">
-                        <Wrench className="w-6 h-6 text-red-600 mr-3" />
-                        <h3 className="text-2xl font-bold text-gray-900">Available Equipments</h3>
-                      </div>
-                      {equipmentsLoading ? (
-                        <div className="flex justify-center items-center h-32">
-                          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600"></div>
-                        </div>
-                      ) : (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                          {equipments.map((equipment, idx) => (
-                            <div key={equipment._id || idx} className="bg-red-50 rounded-lg p-6">
-                              <img
-                                src={equipment.image}
-                                alt={equipment.name}
-                                className="w-full h-32 object-cover rounded-md mb-4"
-                              />
-                              <h4 className="font-bold text-red-900 mb-2">{equipment.name}</h4>
-                              <p className="text-red-800 text-sm mb-2">{equipment.price} ETB</p>
-                              <p className="text-red-700 text-sm">{equipment.description}</p>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                      {equipments.length === 0 && !equipmentsLoading && (
-                        <div className="text-center py-8">
-                          <p className="text-red-600">No equipments available at the moment.</p>
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Trusted Brands */}
-                    <div className="mb-12">
-                      <div className="flex items-center mb-6">
-                        <Award className="w-6 h-6 text-blue-600 mr-3" />
-                        <h3 className="text-2xl font-bold text-gray-900">{t.trustedBrands}</h3>
-                      </div>
-                      <div className="bg-blue-50 rounded-lg p-6">
-                        <p className="text-blue-800">{service.brands}</p>
-                      </div>
-                    </div>
-
-                    {/* Complete Support Package */}
-                    <div className="mb-12">
-                      <div className="flex items-center mb-6">
-                        <Check className="w-6 h-6 text-green-600 mr-3" />
-                        <h3 className="text-2xl font-bold text-gray-900">{t.completeSupportPackage}</h3>
-                      </div>
-                      <div className="bg-green-50 rounded-lg p-6">
-                        <p className="text-green-800">{service.support}</p>
-                      </div>
-                    </div>
-                  </>
-                )}
               </div>
             </div>
           </section>

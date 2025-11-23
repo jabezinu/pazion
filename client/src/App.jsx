@@ -11,6 +11,7 @@ import Services from './pages/Services';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import GemstonesPage from './pages/GemstonesPage';
+import EquipmentPage from './pages/EquipmentPage';
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/products" element={<Products />} />
                 <Route path="/gemstones" element={<GemstonesPage />} />
+                <Route path="/equipment" element={<EquipmentPage />} />
                 <Route path="/services" element={<Services />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />

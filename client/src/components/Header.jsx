@@ -21,6 +21,7 @@ export default function Header() {
   const navigation = [
     { name: translations.home, id: 'home', path: '/' },
     { name: translations.gemstones, id: 'gemstones', path: '/gemstones' },
+    { name: translations.equipment, id: 'equipment', path: '/equipment' },
     { name: translations.services, id: 'services', path: '/services' },
     { name: translations.about, id: 'about', path: '/about' },
     { name: translations.contact, id: 'contact', path: '/contact' }
