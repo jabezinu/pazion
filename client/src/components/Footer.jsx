@@ -59,7 +59,7 @@ export default function Footer() {
               <div className="space-y-3">
                 <div className="flex items-start">
                   <MapPin className="w-5 h-5 text-blue-400 mr-3 mt-1 flex-shrink-0" />
-                  <span>123 Gem Street, Diamond City, GD 12345</span>
+                  <span>Addis Ababa, Ethiopia</span>
                 </div>
                 <div className="flex items-center">
                   <Phone className="w-5 h-5 text-blue-400 mr-3 flex-shrink-0" />
@@ -75,7 +75,7 @@ export default function Footer() {
 
           <div className="border-t border-gray-700 pt-8 text-center">
             <p className="text-gray-400">
-              © 2024 KalGemstone - ቃልጄምስቶን. All rights reserved. | Designed with ❤️ for gemstone enthusiasts
+              © 2024 KalGemstone - ቃልጄምስቶን. All rights reserved. | made by <a href="https://akiyasolutions.com" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition">Akiyasolutions</a>
             </p>
           </div>
         </div>
