@@ -368,11 +368,6 @@ export default function Services() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                           {courses.map((course, idx) => (
                             <div key={course._id || idx} className="bg-teal-50 rounded-lg p-6">
-                              <img
-                                src={course.image}
-                                alt={course.name}
-                                className="w-full h-32 object-cover rounded-md mb-4"
-                              />
                               <h4 className="font-bold text-teal-900 mb-2">{course.name}</h4>
                               <div className="space-y-1 text-sm text-teal-800">
                                 <p><strong>{t.duration}:</strong> {course.duration}</p>

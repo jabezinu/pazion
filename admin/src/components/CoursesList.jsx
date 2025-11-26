@@ -90,14 +90,12 @@ export default function CoursesList() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
         {courses.map((course) => (
           <div key={course._id} className="bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-lg hover:border-gray-300 transition-all duration-300 overflow-hidden group">
-            {/* Image Section */}
-            <div className="relative overflow-hidden">
-              <img
-                src={course.image}
-                alt={course.name}
-                className="w-full h-32 sm:h-40 md:h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="absolute top-3 right-3">
+            {/* Header Section */}
+            <div className="p-5 pb-3 border-b border-gray-100">
+              <div className="flex items-center justify-between">
+                <h3 className="text-lg font-semibold text-gray-900 group-hover:text-blue-700 transition-colors">
+                  {course.name}
+                </h3>
                 <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium shadow-sm ${
                   course.level === 'Beginner'
                     ? 'bg-green-100 text-green-800 border border-green-200'
@@ -114,10 +112,6 @@ export default function CoursesList() {
 
             {/* Content Section */}
             <div className="p-5">
-              <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-700 transition-colors">
-                {course.name}
-              </h3>
-
               <div className="space-y-2 mb-3">
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-gray-500">Duration</span>

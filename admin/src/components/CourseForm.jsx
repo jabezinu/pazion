@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { FaSave, FaArrowLeft, FaBook, FaClock, FaDollarSign, FaLayerGroup, FaFileAlt, FaImage } from 'react-icons/fa'
+import { FaSave, FaArrowLeft, FaBook, FaClock, FaDollarSign, FaLayerGroup, FaFileAlt } from 'react-icons/fa'
 import { toast } from 'react-toastify'
 import { useData } from '../contexts/DataContext'
 import courseService from '../services/courseService'
@@ -18,11 +18,9 @@ export default function CourseForm() {
     duration: '',
     price: '',
     level: 'Beginner',
-    description: '',
-    image: null
+    description: ''
   })
 
-  const [currentImageUrl, setCurrentImageUrl] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [fetchLoading, setFetchLoading] = useState(isEditing)
@@ -36,10 +34,8 @@ export default function CourseForm() {
         duration: course.duration || '',
         price: course.price || '',
         level: course.level || 'Beginner',
-        description: course.description || '',
-        image: null // Don't set the image file for editing, keep it as URL
+        description: course.description || ''
       })
-      setCurrentImageUrl(course.image || '')
     } catch (err) {
       setError('Failed to fetch course')
       toast.error('Failed to fetch course')
@@ -56,18 +52,11 @@ export default function CourseForm() {
   }, [isEditing, fetchCourse])
 
   const handleChange = (e) => {
-    const { name, value, type, files } = e.target
-    if (type === 'file') {
-      setFormData(prev => ({
-        ...prev,
-        [name]: files[0]
-      }))
-    } else {
-      setFormData(prev => ({
-        ...prev,
-        [name]: value
-      }))
-    }
+    const { name, value } = e.target
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }))
   }
 
   const handleSubmit = async (e) => {
@@ -75,12 +64,6 @@ export default function CourseForm() {
     setLoading(true)
     setError(null)
 
-    // Validate image for new courses
-    if (!isEditing && !formData.image) {
-      setError('Please select an image file')
-      setLoading(false)
-      return
-    }
 
     try {
       if (isEditing) {
@@ -229,51 +212,6 @@ export default function CourseForm() {
                 />
               </div>
 
-              <div className="sm:col-span-2">
-                <label htmlFor="image" className="flex items-center text-sm font-semibold text-gray-800 mb-2">
-                  <FaImage className="mr-2 text-pink-600" />
-                  Course Image *
-                </label>
-                {isEditing && currentImageUrl && (
-                  <div className="mt-3 mb-4 p-4 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
-                    <p className="text-sm font-medium text-gray-700 mb-3">Current Image:</p>
-                    <img
-                      src={currentImageUrl}
-                      alt="Current course"
-                      className="h-24 w-24 sm:h-32 sm:w-32 md:h-40 md:w-40 object-cover rounded-lg shadow-md border-4 border-white"
-                    />
-                  </div>
-                )}
-                <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg hover:border-blue-400 transition-colors duration-200">
-                  <div className="space-y-1 text-center">
-                    <FaImage className="mx-auto h-12 w-12 text-gray-400" />
-                    <div className="flex text-sm text-gray-600">
-                      <label
-                        htmlFor="image"
-                        className="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500"
-                      >
-                        <span>Upload a file</span>
-                        <input
-                          id="image"
-                          name="image"
-                          type="file"
-                          accept="image/*"
-                          required={!isEditing}
-                          onChange={handleChange}
-                          className="sr-only"
-                        />
-                      </label>
-                      <p className="pl-1">or drag and drop</p>
-                    </div>
-                    <p className="text-xs text-gray-500">
-                      PNG, JPG, GIF up to 10MB
-                    </p>
-                  </div>
-                </div>
-                <p className="mt-2 text-sm text-gray-600">
-                  {isEditing ? 'Upload a new image to replace the current one (optional)' : 'Select an image file for the course'}
-                </p>
-              </div>
             </div>
 
             <div className="flex flex-col sm:flex-row sm:justify-end space-y-4 sm:space-y-0 sm:space-x-4 pt-8 border-t border-gray-200">
