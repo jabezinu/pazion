@@ -1,17 +1,20 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Suspense, lazy } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { ModalProvider } from './contexts/ModalContext';
 import { DataProvider } from './contexts/DataContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Home from './pages/Home';
-import Products from './pages/Products';
-import Services from './pages/Services';
-import About from './pages/About';
-import Contact from './pages/Contact';
-import GemstonesPage from './pages/GemstonesPage';
-import EquipmentPage from './pages/EquipmentPage';
+
+// Lazy load pages for better performance
+const Home = lazy(() => import('./pages/Home'));
+const Products = lazy(() => import('./pages/Products'));
+const Services = lazy(() => import('./pages/Services'));
+const About = lazy(() => import('./pages/About'));
+const Contact = lazy(() => import('./pages/Contact'));
+const GemstonesPage = lazy(() => import('./pages/GemstonesPage'));
+const EquipmentPage = lazy(() => import('./pages/EquipmentPage'));
 
 export default function App() {
   return (
@@ -22,15 +25,21 @@ export default function App() {
           <div className="min-h-screen bg-gray-50">
             <Header />
             <main>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/products" element={<Products />} />
-                <Route path="/gemstones" element={<GemstonesPage />} />
-                <Route path="/equipment" element={<EquipmentPage />} />
-                <Route path="/services" element={<Services />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/contact" element={<Contact />} />
-              </Routes>
+              <Suspense fallback={
+                <div className="flex justify-center items-center min-h-screen">
+                  <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600"></div>
+                </div>
+              }>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/products" element={<Products />} />
+                  <Route path="/gemstones" element={<GemstonesPage />} />
+                  <Route path="/equipment" element={<EquipmentPage />} />
+                  <Route path="/services" element={<Services />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/contact" element={<Contact />} />
+                </Routes>
+              </Suspense>
             </main>
             <Footer />
           </div>

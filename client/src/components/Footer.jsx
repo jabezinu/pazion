@@ -1,4 +1,4 @@
-import { Menu, X, ChevronRight, Star, Award, Globe, Users, ShoppingBag, TestTube, Wrench, GraduationCap, MessageCircle, Phone, Mail, MapPin, Facebook, Instagram, Linkedin, Youtube } from 'lucide-react';
+import { Award, Phone, Mail, MapPin, Facebook, Instagram, Linkedin } from 'lucide-react';
 
 
 export default function Footer() {
