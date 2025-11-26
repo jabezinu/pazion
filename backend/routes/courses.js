@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const courseController = require('../controllers/courseController');
 const { authenticateAdmin } = require('../middleware/auth');
+const { validateCourse } = require('../middleware/validation');
 
 // GET /api/courses - Get all courses (public)
 router.get('/', courseController.getAllCourses);
@@ -10,10 +11,10 @@ router.get('/', courseController.getAllCourses);
 router.get('/:id', courseController.getCourseById);
 
 // POST /api/courses - Create new course (protected)
-router.post('/', authenticateAdmin, courseController.createCourse);
+router.post('/', authenticateAdmin, validateCourse, courseController.createCourse);
 
 // PUT /api/courses/:id - Update course (protected)
-router.put('/:id', authenticateAdmin, courseController.updateCourse);
+router.put('/:id', authenticateAdmin, validateCourse, courseController.updateCourse);
 
 // DELETE /api/courses/:id - Delete course (protected)
 router.delete('/:id', authenticateAdmin, courseController.deleteCourse);

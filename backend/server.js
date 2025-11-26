@@ -1,6 +1,9 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
 const gemstonesRouter = require('./routes/gemstones');
 const coursesRouter = require('./routes/courses');
 const equipmentsRouter = require('./routes/equipments');
@@ -9,20 +12,46 @@ const commentsRouter = require('./routes/comments');
 const videosRouter = require('./routes/videos');
 const authRouter = require('./routes/auth');
 const cloudinary = require('cloudinary').v2;
+const errorHandler = require('./middleware/errorHandler');
 
 // Configure Cloudinary
 cloudinary.config({
-  cloud_name: 'dri04iflq',
-  api_key: '265833691256595',
-  api_secret: '_o-_u9uliTngb2CTqkfJssP_mU4'
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
 const app = express();
-const PORT = 5001;
+const PORT = process.env.PORT || 5001;
+
+// Rate limiting
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+  message: 'Too many requests from this IP, please try again later.',
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+// Stricter rate limiting for auth routes
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 5, // limit each IP to 5 auth requests per windowMs
+  message: 'Too many authentication attempts, please try again later.',
+  standardHeaders: true,
+  legacyHeaders: false,
+});
 
 // Middleware
-app.use(cors());
-app.use(express.json());
+app.use(helmet()); // Security headers
+app.use(limiter); // General rate limiting
+app.use('/api/auth', authLimiter); // Stricter rate limiting for auth
+app.use(cors({
+  origin: process.env.NODE_ENV === 'production' ? process.env.FRONTEND_URL : ['http://localhost:3000', 'http://localhost:5173'],
+  credentials: true
+}));
+app.use(express.json({ limit: '10mb' })); // Increase payload limit for file uploads
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 // Disable caching for all API responses
 app.use((req, res, next) => {
@@ -35,7 +64,7 @@ app.use((req, res, next) => {
 });
 
 // MongoDB connection
-mongoose.connect('mongodb://taeemkurt:nQyQZVjUND3xDFZu@ac-znid8xu-shard-00-00.usti5w8.mongodb.net:27017,ac-znid8xu-shard-00-01.usti5w8.mongodb.net:27017,ac-znid8xu-shard-00-02.usti5w8.mongodb.net:27017/yab?ssl=true&replicaSet=atlas-8zhmwz-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Cluster0')
+mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error('MongoDB connection error:', err));
 
@@ -47,6 +76,9 @@ app.use('/api/equipments', equipmentsRouter);
 app.use('/api/contact-messages', contactMessagesRouter);
 app.use('/api/comments', commentsRouter);
 app.use('/api/videos', videosRouter);
+
+// Error handling middleware (must be last)
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

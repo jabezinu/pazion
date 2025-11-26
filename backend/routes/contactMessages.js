@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const contactMessageController = require('../controllers/contactMessageController');
 const { authenticateAdmin } = require('../middleware/auth');
+const { validateContactMessage } = require('../middleware/validation');
 
 // GET /api/contact-messages - Get all contact messages (protected)
 router.get('/', authenticateAdmin, contactMessageController.getAllContactMessages);
@@ -10,7 +11,7 @@ router.get('/', authenticateAdmin, contactMessageController.getAllContactMessage
 router.get('/:id', authenticateAdmin, contactMessageController.getContactMessageById);
 
 // POST /api/contact-messages - Create new contact message (public - for client contact form)
-router.post('/', contactMessageController.createContactMessage);
+router.post('/', validateContactMessage, contactMessageController.createContactMessage);
 
 // PUT /api/contact-messages/:id - Update contact message (protected)
 router.put('/:id', authenticateAdmin, contactMessageController.updateContactMessage);
