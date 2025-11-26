@@ -1,3 +1,2 @@
-// export const BACKEND_URL = 'http://localhost:5001';
-export const BACKEND_URL = 'https://bec.kalgemstones.com';
-export const API_BASE_URL = `${BACKEND_URL}/api`;
+export const API_BASE_URL = `http://localhost:5001/api`;
+// export const API_BASE_URL = `https://bec.kalgemstones.com/api`;
