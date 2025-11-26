@@ -11,7 +11,7 @@ export default function ContactMessagesList() {
   const { showConfirm } = useModal()
 
   useEffect(() => {
-    fetchContactMessages().catch(err => {
+    fetchContactMessages().catch(() => {
       setError('Failed to fetch contact messages')
       toast.error('Failed to fetch contact messages')
     })
@@ -60,7 +60,7 @@ export default function ContactMessagesList() {
 
   const handleRetry = () => {
     setError(null)
-    fetchContactMessages(true).catch(err => {
+    fetchContactMessages(true).catch(() => {
       setError('Failed to fetch contact messages')
       toast.error('Failed to fetch contact messages')
     })

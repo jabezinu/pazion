@@ -12,7 +12,7 @@ export default function GemstonesList() {
   const { showConfirm } = useModal()
 
   useEffect(() => {
-    fetchGemstones().catch(err => {
+    fetchGemstones().catch(() => {
       setError('Failed to fetch gemstones')
       toast.error('Failed to fetch gemstones')
     })
@@ -35,7 +35,7 @@ export default function GemstonesList() {
 
   const handleRetry = () => {
     setError(null)
-    fetchGemstones(true).catch(err => {
+    fetchGemstones(true).catch(() => {
       setError('Failed to fetch gemstones')
       toast.error('Failed to fetch gemstones')
     })

@@ -12,7 +12,7 @@ export default function EquipmentsList() {
   const { showConfirm } = useModal()
 
   useEffect(() => {
-    fetchEquipments().catch(err => {
+    fetchEquipments().catch(() => {
       setError('Failed to fetch equipments')
       toast.error('Failed to fetch equipments')
     })
@@ -35,7 +35,7 @@ export default function EquipmentsList() {
 
   const handleRetry = () => {
     setError(null)
-    fetchEquipments(true).catch(err => {
+    fetchEquipments(true).catch(() => {
       setError('Failed to fetch equipments')
       toast.error('Failed to fetch equipments')
     })

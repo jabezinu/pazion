@@ -12,7 +12,7 @@ export default function CoursesList() {
   const { showConfirm } = useModal()
 
   useEffect(() => {
-    fetchCourses().catch(err => {
+    fetchCourses().catch(() => {
       setError('Failed to fetch courses')
       toast.error('Failed to fetch courses')
     })
@@ -35,7 +35,7 @@ export default function CoursesList() {
 
   const handleRetry = () => {
     setError(null)
-    fetchCourses(true).catch(err => {
+    fetchCourses(true).catch(() => {
       setError('Failed to fetch courses')
       toast.error('Failed to fetch courses')
     })

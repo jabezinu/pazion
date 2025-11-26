@@ -4,7 +4,7 @@ import courseService from '../services/courseService'
 import equipmentService from '../services/equipmentService'
 import videoService from '../services/videoService'
 import contactMessageService from '../services/contactMessageService'
-import { createNotificationSound, playNotificationAudio, requestNotificationPermission, showBrowserNotification } from '../utils/notificationSound'
+import { playNotificationAudio, requestNotificationPermission, showBrowserNotification } from '../utils/notificationSound'
 
 const DataContext = createContext(null)
 

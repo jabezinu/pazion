@@ -16,22 +16,22 @@ export const AuthProvider = ({ children }) => {
   const [admin, setAdmin] = useState(null)
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    checkAuth()
-  }, [])
-
   const checkAuth = async () => {
     const token = localStorage.getItem('adminToken')
     if (token) {
       try {
         const data = await authService.verifyToken()
         setAdmin(data.admin)
-      } catch (error) {
+      } catch {
         localStorage.removeItem('adminToken')
       }
     }
     setLoading(false)
   }
+
+  useEffect(() => {
+    checkAuth()
+  }, [])
 
   const login = async (username, password) => {
     const data = await authService.login(username, password)

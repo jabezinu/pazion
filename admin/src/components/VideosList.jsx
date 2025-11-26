@@ -46,7 +46,7 @@ export default function VideosList() {
   };
 
   useEffect(() => {
-    fetchVideos().catch(err => {
+    fetchVideos().catch(() => {
       setError('Failed to fetch videos')
       toast.error('Failed to fetch videos')
     })
@@ -69,7 +69,7 @@ export default function VideosList() {
 
   const handleRetry = () => {
     setError(null)
-    fetchVideos(true).catch(err => {
+    fetchVideos(true).catch(() => {
       setError('Failed to fetch videos')
       toast.error('Failed to fetch videos')
     })
