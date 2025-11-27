@@ -1,43 +1,15 @@
-import axios from 'axios'
-import { API_BASE_URL } from '../config.js'
-
-const api = axios.create({
-  baseURL: API_BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-})
-
-// Add authentication token to all requests and cache-busting for GET requests
-api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('adminToken')
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`
-  }
-
-  // Add cache-busting for GET requests
-  if (config.method === 'get') {
-    config.params = {
-      ...config.params,
-      _t: Date.now()
-    };
-  }
-
-  return config
-}, (error) => {
-  return Promise.reject(error)
-})
+import axios from '../utils/axiosConfig'
 
 export const gemstoneService = {
   // Get all gemstones
   getAll: async () => {
-    const response = await api.get('/gemstones')
+    const response = await axios.get('/gemstones')
     return response.data
   },
 
   // Get single gemstone by ID
   getById: async (id) => {
-    const response = await api.get(`/gemstones/${id}`)
+    const response = await axios.get(`/gemstones/${id}`)
     return response.data
   },
 
@@ -54,7 +26,7 @@ export const gemstoneService = {
       }
     })
 
-    const response = await api.post('/gemstones', formData, {
+    const response = await axios.post('/gemstones', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -75,7 +47,7 @@ export const gemstoneService = {
       }
     })
 
-    const response = await api.put(`/gemstones/${id}`, formData, {
+    const response = await axios.put(`/gemstones/${id}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -85,7 +57,7 @@ export const gemstoneService = {
 
   // Delete gemstone
   delete: async (id) => {
-    const response = await api.delete(`/gemstones/${id}`)
+    const response = await axios.delete(`/gemstones/${id}`)
     return response.data
   },
 }

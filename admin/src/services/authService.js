@@ -1,32 +1,21 @@
-import axios from 'axios'
-import { API_BASE_URL } from '../config'
-
-const API_URL = `${API_BASE_URL}/auth`
-
-const getAuthHeader = () => {
-  const token = localStorage.getItem('adminToken')
-  return token ? { Authorization: `Bearer ${token}` } : {}
-}
+import axios from '../utils/axiosConfig'
 
 export const authService = {
   login: async (username, password) => {
-    const response = await axios.post(`${API_URL}/login`, { username, password })
+    const response = await axios.post('/auth/login', { username, password })
     return response.data
   },
 
   verifyToken: async () => {
-    const response = await axios.get(`${API_URL}/verify`, {
-      headers: getAuthHeader()
-    })
+    const response = await axios.get('/auth/verify')
     return response.data
   },
 
   changePassword: async (currentPassword, newPassword) => {
-    const response = await axios.post(
-      `${API_URL}/change-password`,
-      { currentPassword, newPassword },
-      { headers: getAuthHeader() }
-    )
+    const response = await axios.post('/auth/change-password', {
+      currentPassword,
+      newPassword
+    })
     return response.data
   }
 }
